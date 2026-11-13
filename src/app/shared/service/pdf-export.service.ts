@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import autoTable, { UserOptions } from 'jspdf-autotable';
 
+
 @Injectable({ providedIn: 'root' })
 export class PdfExportService {
   generateFinancialReport(
