@@ -1,0 +1,132 @@
+<app-page-header [title]="title | translate"></app-page-header>
+<div class="matero-page-header">
+  <p-toolbar>
+    <div class="ui-toolbar-group-left">
+      <button
+        pButton
+        type="button"
+        label="Show"
+        [disabled]="!Permission?.View"
+        (click)="ApplyFilters('list')"
+        icon="fa fa-search"
+        class="ui-button-info"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="Print"
+        [disabled]="!Permission?.Print"
+        icon="fa fa-print"
+        (click)="ApplyFilters('print')"
+        class="ui-button-success"
+      ></button>
+      <button
+        pButton
+        type="button"
+        class="ui-button-danger"
+        label="Payable Receivable"
+        icon="fa fa-money"
+      ></button>
+      <button
+        pButton
+        type="button"
+        icon="fa fa-envelope"
+        class="ui-button-success"
+        label="Email"
+      ></button>
+      <button
+        pButton
+        type="button"
+        class="ui-button-success"
+        label="Excel"
+        icon="fa fa-file-excel-o"
+      ></button>
+      <button pButton type="button" label="Exit" icon="fa fa-sign-out"></button>
+    </div>
+  </p-toolbar>
+  <div class="card card-w-title">
+    <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+      <p-tabPanel [header]="'Ageing Report' | translate">
+        <br />
+        <div class="p-grid">
+          <label class="p-col-12 p-md-4 p-lg-1" for="account">
+            {{ "Customer:" | translate }}
+          </label>
+          <div class="p-col-12 p-md-8 p-lg-5">
+            <p-dropdown
+              filter="true"
+              [options]="customer"
+              [(ngModel)]="selectedcustomer"
+              placeholder="Customer"
+            >
+            </p-dropdown>
+          </div>
+          <!-- </div>
+                <br>
+                <div class="p-grid"> -->
+          <label class="p-col-12 p-md-4 p-lg-1" for="account">
+            {{ "Ason:" | translate }}
+          </label>
+          <div class="p-col-12 p-md-8 p-lg-5">
+            <p-calendar
+              appendTo="body"
+              dateFormat="dd/mm/yy"
+              [showButtonBar]="true"
+              [monthNavigator]="true"
+              [yearNavigator]="true"
+              yearRange="2000:2040"
+              useUtc
+              showIcon="true"
+              [(ngModel)]="selectedAsOnDate"
+              class="w-100"
+            >
+            </p-calendar>
+          </div>
+          <label class="p-col-12 p-md-4 p-lg-1" for="account">
+            {{ "Key Word:" | translate }}
+          </label>
+          <div class="p-col-12 p-md-8 p-lg-5">
+            <input pInputText style="width: 100%" [(ngModel)]="keyword" />
+          </div>
+          <!-- </div>
+                <br>
+                <div class="p-grid"> -->
+          <div class="p-col-12 p-md-6 p-lg-3">
+            <p-checkbox
+              label="Show Accounts With Unallocated Balance"
+              [(ngModel)]="showUnallocated"
+              [binary]="true"
+              style="color: brown"
+            ></p-checkbox>
+          </div>
+          <div class="p-col-12 p-md-6 p-lg-3">
+            <p-checkbox
+              label="Show Unallocated Balance(Print)"
+              style="color: brown"
+            ></p-checkbox>
+          </div>
+        </div>
+
+        <br />
+      </p-tabPanel>
+    </p-tabView>
+    <br />
+    <div class="card card-w-title">
+      <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+        <p-tabPanel [header]="'Details' | translate">
+          <div class="grid">
+            <div class="p-col-12">
+              <hot-table
+                [hotId]="hotid"
+                [data]="dataset"
+                [licenseKey]="licensekey"
+                [settings]="AgeingReport"
+              >
+              </hot-table>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</div>

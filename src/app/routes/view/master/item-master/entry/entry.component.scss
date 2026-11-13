@@ -1,0 +1,393 @@
+/* Modern UI Styles */
+.modern-ui-container {
+  background: #f8fafc;
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* Header */
+.ui-header {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-title i {
+  font-size: 2rem;
+  color: #3b82f6;
+}
+
+.header-title h1 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.badge {
+  background: #10b981;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Main Content */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 1.5rem auto;
+  padding: 0 2rem;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.card-header {
+  background: #f8fafc;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.card-header i {
+  color: #3b82f6;
+  font-size: 1.25rem;
+}
+
+.card-header h3 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+// .card-body {
+//   // padding: 0.5rem;
+// }
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 1.5rem;
+  width: 50%;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #374151;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.modern-input,
+.modern-textarea,
+.modern-dropdown {
+  width: 100%;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.modern-input:focus,
+.modern-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.modern-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Input with Button */
+.input-with-button {
+  position: relative;
+  display: flex;
+}
+
+.input-with-button .modern-input {
+  flex: 1;
+  padding-right: 3rem;
+}
+
+.search-btn {
+  position: absolute;
+  right: 0.25rem;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  min-width: auto !important;
+  padding: 0 0.75rem !important;
+  border-radius: 6px !important;
+}
+
+/* Specifications Grid */
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.spec-item label {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+/* Image Card */
+.image-card .card-body {
+  text-align: center;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 300px;
+  height: 100px;
+  object-fit: contain;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #f9fafb;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.upload-btn:hover {
+  background: #2563eb;
+}
+
+.image-action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+/* Table Cards */
+.table-card .card-body {
+  padding: 0;
+}
+
+.table-wrapper {
+  height: 100px;
+  overflow: auto;
+}
+
+/* Item List */
+.item-list-card {
+  max-height: 400px;
+}
+
+.compact-table {
+  font-size: 0.9rem;
+}
+
+.item-id {
+  color: #6b7280;
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.item-name {
+  color: #374151;
+  font-weight: 500;
+}
+
+/* Error Message */
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #fef2f2;
+  border-radius: 6px;
+  border-left: 3px solid #dc2626;
+}
+.unit-details-panel {
+  grid-column: 1 / -1; /* ensures full width if using grid */
+  // width: 100%;
+  margin: 1.7rem;
+  margin-top: 0.1rem;
+}
+
+.error-message i {
+  color: #dc2626;
+}
+.full-width-section {
+  grid-column: 1 / -1; /* Spans all columns */
+  width: 100%;
+}
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .right-section {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 0 1rem;
+  }
+
+  .ui-header {
+    padding: 1rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* Button Improvements */
+.p-button {
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+}
+
+.p-button-success {
+  background: #10b981 !important;
+  border-color: #10b981 !important;
+}
+
+.p-button-success:hover {
+  background: #059669 !important;
+  border-color: #059669 !important;
+}
+
+/* Dropdown Improvements */
+.p-dropdown {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+/* Checkbox Improvements */
+.p-checkbox .p-checkbox-box {
+  border-radius: 4px;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+/* Table Improvements */
+.p-datatable .p-datatable-thead > tr > th {
+  background: #f8fafc;
+  color: #374151;
+  font-weight: 600;
+  border-color: #e2e8f0;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  border-color: #e2e8f0;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background: #f8fafc;
+}
+
+::ng-deep .btn {
+  min-width: 100px !important;
+  max-width: 100px !important;
+  padding: 8px 0 !important;
+  margin: 2px 0 !important;
+  border-radius: 3px;
+  color: black !important;
+  // border: none !important;
+  background-color: #007ad9 !important;
+}
+
+///tooltip ///
+.custom-tooltip {
+  position: relative;
+  cursor: pointer; /* optional */
+}

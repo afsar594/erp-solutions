@@ -1,0 +1,2019 @@
+[
+  {
+    "label": "Dashboard",
+    "icon": "fa fa-fw fa-home",
+    "privilages": [
+      1,
+      2,
+      4
+    ],
+    "routerLink": [
+      "/dashboard"
+    ]
+  },
+  {
+    "label": "import",
+    "icon": "fa fa-fw fa-file-excel-o",
+    "privilages": [
+      4
+    ],
+    "routerLink": [
+      "/import/excel"
+    ]
+  },
+  {
+    "label": "Master",
+    "icon": "fa fa-fw fa-gg",
+    "privilages": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "items": [
+      {
+        "label": "Currency",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "routerLink": [
+          "/master/currency"
+        ]
+      },
+      {
+        "label": "Country",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          2,
+          4
+        ],
+        "routerLink": [
+          "/master/country"
+        ]
+      },
+      {
+        "label": "Customer",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          4
+        ],
+        "items": [
+          {
+            "label": "Add New Customer",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/master/customer/add"
+            ]
+          },
+          {
+            "label": "View Customer",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2,
+              4
+            ],
+            "routerLink": [
+              "/master/customer/view"
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Supplier",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          2,
+          5
+        ],
+        "routerLink": [
+          "/master/supplier"
+        ]
+      },
+      {
+        "label": "Staff Detail",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "routerLink": [
+          "/master/staff-details"
+        ]
+      },
+      {
+        "label": "List Master",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          2,
+          5,
+          6,
+          7
+        ],
+        "routerLink": [
+          "/master/list-master"
+        ]
+      },
+      {
+        "routerLink": [
+          "/master/item/list"
+        ],
+        "label": "Item Master",
+        "privilages": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "label": "Location",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/master/location"
+        ]
+      },
+      {
+        "label": "City",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/master/city"
+        ]
+      },
+      {
+        "label": "Code",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          2
+        ],
+        "items": [
+          {
+            "label": "brand",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/master/code/brand"
+            ]
+          },
+          {
+            "label": "model",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/master/code/model"
+            ]
+          },
+          {
+            "label": "Type",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/master/code/type"
+            ]
+          },
+          {
+            "label": "Unit",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/master/code/unit"
+            ]
+          }
+        ]
+      },
+      {
+        "routerLink": [
+          "/master/termsandcondition"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Terms and Condition",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/budget"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Budget",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/costcenter"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Cost Center",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/businesstype"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Business Type",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/jobtype"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Job Type",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/job"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Job ",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/jobmaster"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Job Master",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/asset"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Asset Management",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/chartofaccount"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Chart of Accounts",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/salesman"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Salesman",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/pricelevel"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Price Level Master",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/emailsettings"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Email Settings",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/loyalty"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Loyalty Master",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/offers"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Offers",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/salesprocessing"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Sales Processing",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/paymentmode"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Payment Mode",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/accountmanualcodentry"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Account Manual Code Entry",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/assetchart"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Asset Chart",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/assetregister"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Asset Register",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/bankguarantee"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Bank Guarantee",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/changepassword"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Change password",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/depreciationregister"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Depreciation Register",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/projectdescription"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Project Description",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/workgroup"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Work Group",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/department"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Department Master",
+        "icon": "fa fa-fw fa-sign-in"
+      },
+      {
+        "routerLink": [
+          "/master/tax"
+        ],
+        "privilages": [
+          1,
+          2
+        ],
+        "label": "Tax",
+        "icon": "fa fa-fw fa-sign-in"
+      }
+    ]
+  },
+  {
+    "label": "Account",
+    "icon": "fa fa-fw fa-book",
+    "privilages": [
+      1,
+      3
+    ],
+    "items": [
+      {
+        "label": "Invoice",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      },
+      {
+        "label": "Payment Voucher",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/paymentvoucher"
+        ]
+      },
+      {
+        "label": "Receipt Voucher",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/receiptvoucher"
+        ]
+      },
+      {
+        "label": "Journal Voucher",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/journalvoucher"
+        ]
+      },
+      {
+        "label": "Bank Reconcilation",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/BankReconcilation"
+        ]
+      },
+      {
+        "label": "Contra  Voucher",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/contravoucher"
+        ]
+      },
+      {
+        "label": "Debit Note",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/debitnote"
+        ]
+      },
+      {
+        "label": "Credit Note",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/creditnote"
+        ]
+      },
+      {
+        "label": "Voucher Printing",
+        "privilages": [
+          1,
+          3
+        ],
+        "icon": "fa fa-fw fa-sign-in",
+        "routerLink": [
+          "/account/VoucherPrinting"
+        ]
+      },
+      {
+        "label": "Day Book",
+        "privilages": [
+          1,
+          3
+        ],
+        "icon": "fa fa-fw fa-sign-in",
+        "routerLink": [
+          "/account/daybook"
+        ]
+      },
+      {
+        "label": "Asset Purchase",
+        "privilages": [
+          1,
+          3
+        ],
+        "icon": "fa fa-fw fa-sign-in",
+        "routerLink": [
+          "/account/assetPurchase"
+        ]
+      },
+      {
+        "label": "Asset Opening",
+        "privilages": [
+          1,
+          3
+        ],
+        "icon": "fa fa-fw fa-sign-in",
+        "routerLink": [
+          "/account/assetOpening"
+        ]
+      },
+      {
+        "label": "Journal Invoice",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/journalinvoice"
+        ]
+      },
+      {
+        "label": "Purchase Journal",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/purchasejournal"
+        ]
+      },
+      {
+        "label": "Voucher Allocation",
+        "privilages": [
+          1,
+          3
+        ],
+        "icon": "fa fa-fw fa-sign-in",
+        "routerLink": [
+          "/account/voucher-allocation"
+        ]
+      },
+      {
+        "label": "Sales Journal",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/salesjournal"
+        ]
+      },
+      {
+        "label": "Opening Balance Voucher",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/openingbalancevoucher"
+        ]
+      },
+      {
+        "label": "Job Invoice",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/jobinvoice"
+        ]
+      },
+      {
+        "label": "Reports",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "items": [
+          {
+            "label": "Accounts Transactions Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "account/accountstransactionsreport"
+            ]
+          },
+          {
+            "label": "General Accounts Statement",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "account/account-statement"
+            ]
+          },
+          {
+            "label": "General Accounts Statement(Multiple Selection)",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "account/MultiAccount"
+            ]
+          },
+          {
+            "label": "General Accounts Statement by Group",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Accounts Statement By Foreign Currency",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Outstanding Statement",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "account/outstandingstatement"
+            ]
+          },
+          {
+            "label": "Customer Statement",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Bank Statement",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Bank Transfer Statement",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Multi Account",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/account/MultiAccount"
+            ]
+          },
+          {
+            "label": "Job Cost Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Ageing Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Bank Book",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Cash Book",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Asset Purchase List",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Voucher Printing",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "VAT Statement",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          }
+        ]
+      },
+      {
+        "label": "PDC Posting",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/PDCPosting"
+        ]
+      },
+      {
+        "label": "Previous Balnace Sheet Entry",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/previous-balancesheet"
+        ]
+      },
+      {
+        "label": "Bank Receipt Voucher",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/bankreceiptvoucher"
+        ]
+      },
+      {
+        "label": "Bank Payment Voucher",
+        "icon": "fa fa-fw fa-sign-in",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/account/bankpaymentvoucher"
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Store And WareHouses",
+    "icon": "fa fa-fw fa-book",
+    "privilages": [
+      1,
+      3,
+      6
+    ],
+    "items": [
+      {
+        "label": "Good Receipt Voucher (GRN)",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/storewarehouse/GRN"
+        ]
+      },
+      {
+        "label": "Alternativ Item",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/storewarehouse/alternative-item"
+        ]
+      },
+      {
+        "label": "Finish Product Entry",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/storewarehouse/finished-product-entry"
+        ]
+      },
+      {
+        "label": "GRN Pending List",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      },
+      {
+        "label": "Issue To Production",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/storewarehouse/issuevoucher"
+        ]
+      },
+      {
+        "label": "Issue Return(Received Back from Production)",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/storewarehouse/issuereturn"
+        ]
+      },
+      {
+        "label": "Reports",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1
+        ],
+        "items": [
+          {
+            "label": "Stock Ledger Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "storewarehouse/stockledgerreport"
+            ]
+          },
+          {
+            "label": "Stock Register Report",
+            "icon": "fa fa-fw fa-gg",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "storewarehouse/reportstockregister"
+            ]
+          },
+          {
+            "label": "Stock Movement Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/stockmovementreport"
+            ]
+          },
+          {
+            "label": "Stock Ledger",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "storewarehouse/reportstockLedger"
+            ]
+          },
+          {
+            "label": "Stock Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/stockreport'"
+            ]
+          },
+          {
+            "label": "Stock Report(Base Unit)",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/stockreportbaseunit"
+            ]
+          },
+          {
+            "label": "Stock Movement",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/stockmovement"
+            ]
+          },
+          {
+            "label": "Stock Adjustment Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/stockadjustmentreport"
+            ]
+          },
+          {
+            "label": "Stock Adjustment Voucher",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/stockadjustmentvoucher"
+            ]
+          },
+          {
+            "label": "Reorder Level Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/recorderlevelreport"
+            ]
+          },
+          {
+            "label": "BOM Status",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/bomstatus"
+            ]
+          },
+          {
+            "label": "Issue Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "storewarehouse/issuereport"
+            ]
+          },
+          {
+            "label": "Invoice Profit Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/invoiceprofitreport"
+            ]
+          },
+          {
+            "label": "Stock Ageing Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/stockageingreport"
+            ]
+          },
+          {
+            "label": "Item Wise Profit Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/storewarehouse/itemwiseprofitreport"
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Damage Entry",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/damageentry"
+        ]
+      },
+      {
+        "label": "Stock Adjustment",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/storewarehouse/stockadjustment"
+        ]
+      },
+      {
+        "label": "Stock Transfer",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/storewarehouse/stocktransfer"
+        ]
+      },
+      {
+        "label": "Opening Stock",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/storewarehouse/openingstock"
+        ]
+      },
+      {
+        "label": "Stock Reservation",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      },
+      {
+        "label": "Stock Transfer Job Wise",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      },
+      {
+        "label": "Manufacture Items",
+        "icon": "fa fa-fw fa-wrench",
+        "items": [
+          {
+            "label": "Manufacture(Component List)",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Item Manufacturing Entry",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Item List",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          3
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Sales",
+    "icon": "fa fa-fw fa-book",
+    "privilages": [
+      1,
+      2,
+      6
+    ],
+    "items": [
+      {
+        "label": "Sales Voucher",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/sale/salesvoucher"
+        ]
+      },
+      {
+        "label": "Sales Return",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/sale/salesreturn"
+        ]
+      },
+      {
+        "label": "Customer Sales Order",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/sale/customer-sales-order"
+        ]
+      },
+      {
+        "label": "Delivery Note",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/sale/deliverynote"
+        ]
+      },
+      {
+        "label": "Customer Quotation",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/sale/customerquotation"
+        ]
+      },
+      {
+        "label": "Customer Enquiry",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/sale/customerenquiry"
+        ]
+      },
+      {
+        "label": "Proforma Invoice",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/sale/proformainvoice"
+        ]
+      },
+      {
+        "label": "Reports",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2,
+          3
+        ],
+        "items": [
+          {
+            "label": "Customer Enquiry Search",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2,
+              3
+            ],
+            "routerLink": [
+              "/sale/customer-enquiry-search"
+            ]
+          },
+          {
+            "label": "Customer Enquiry  report wise",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2,
+              3
+            ],
+            "routerLink": [
+              "/sale/customer-sales-report-wise"
+            ]
+          },
+          {
+            "label": "Customer Order Tracking",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Customer Wise Sales Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Salesman Wise Outstanding Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Sales Men Wise Sales Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Sales Report",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2,
+              3
+            ],
+            "routerLink": [
+              "/sale/salesReport"
+            ]
+          },
+          {
+            "label": "Sales Summary by Date",
+            "icon": "fa fa-fw fa-sign-in",
+            "privilages": [
+              1,
+              2,
+              3
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Bill of Materials (BOM)",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      },
+      {
+        "label": "Bill of Quantity (BOQ)",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      },
+      {
+        "label": "List Invoice Without Account Entry",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Procurement",
+    "icon": "fa fa-fw fa-book",
+    "privilages": [
+      1,
+      2,
+      3
+    ],
+    "items": [
+      {
+        "label": "Purchase Voucher",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/procurement/purchasevoucher"
+        ]
+      },
+      {
+        "label": "Purchase Return",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/procurement/purchasereturn"
+        ]
+      },
+      {
+        "label": "Purchase Order",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/procurement/purchaseorder"
+        ]
+      },
+      {
+        "label": "Purchase Quotation",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/procurement/purchasequotation"
+        ]
+      },
+      {
+        "label": "Purchase Requisition",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/procurement/purchaserequisition"
+        ]
+      },
+      {
+        "label": "General Purchase Order",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      },
+      {
+        "label": "RFQ",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      },
+      {
+        "label": "Purchase Requisition",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/procurement/storerequisition"
+        ]
+      },
+      {
+        "label": "Supplier Quotation",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      },
+      {
+        "label": "Reports",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "items": [
+          {
+            "label": "Purchase Report",
+            "icon": "fa fa-fw fa-wrench",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/procurement/reportpurchasereturn"
+            ]
+          },
+          {
+            "label": "Purchase Order Approval Status",
+            "icon": "fa fa-fw fa-wrench",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Purchase Order List",
+            "icon": "fa fa-fw fa-gear",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/procurement/reportpurchaseorder"
+            ]
+          },
+          {
+            "label": "Purchase Order Tracking",
+            "icon": "fa fa-fw fa-wrench",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/procurement/potracking"
+            ]
+          },
+          {
+            "label": "Purchase Requisition Status",
+            "icon": "fa fa-fw fa-gear",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "procurement/reportpurchaserequisition"
+            ]
+          },
+          {
+            "label": "Price Comparison",
+            "icon": "fa fa-fw fa-wrench",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Purchase Supplier Wise",
+            "icon": "fa fa-fw fa-gear",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/documentation"
+            ]
+          },
+          {
+            "label": "Purchase Report Detailed",
+            "icon": "fa fa-fw fa-wrench",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/utils"
+            ]
+          },
+          {
+            "label": "Purchase Report",
+            "icon": "fa fa-fw fa-gear",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/procurement/reportpurchasevoucher"
+            ]
+          },
+          {
+            "label": "Purchase Order Report",
+            "icon": "fa fa-fw fa-gear",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/procurement/purchase-order-report"
+            ]
+          },
+          {
+            "label": "Purchase Report Supplier Wise",
+            "icon": "fa fa-fw fa-gear",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/procurement/Purchase-Report-Supplier-Wise"
+            ]
+          },
+          {
+            "label": "General Purchase Order Report",
+            "icon": "fa fa-fw fa-wrench",
+            "privilages": [
+              1,
+              2
+            ],
+            "routerLink": [
+              "/procurement/general-purchase-orde"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "MIS Report",
+    "icon": "fa fa-fw fa-book",
+    "privilages": [
+      1
+    ],
+    "items": [
+      {
+        "label": "Trial Balance",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/misreport/trialbalance"
+        ]
+      },
+      {
+        "label": "Profit and Loss",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/misreport/profit-and-loss"
+        ]
+      },
+      {
+        "label": "Balance Sheet",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/misreport/balance-sheet"
+        ]
+      },
+      {
+        "label": "User Activity",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Administration",
+    "icon": "fa fa-fw fa-book",
+    "privilages": [
+      1,
+      2
+    ],
+    "items": [
+      {
+        "label": "General Settings",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/administration/generalsettings"
+        ]
+      },
+      {
+        "label": "Program Settings",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/administration/programsettings"
+        ]
+      },
+      {
+        "label": "Permission Settings",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      },
+      {
+        "label": "Barcode Settings",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      },
+      {
+        "label": "Account Settings",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      },
+      {
+        "label": "Settings(Option)",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/administration/optionsettings"
+        ]
+      },
+      {
+        "label": "Query Window",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      },
+      {
+        "label": "Company Master",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      },
+      {
+        "label": "User Profile",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/administration/usermaster"
+        ]
+      },
+      {
+        "label": "Work Group Master",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      },
+      {
+        "label": "Report Type Master",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/administration/report-type-master"
+        ]
+      },
+      {
+        "label": "Financial Period Closing",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/administration/financial-period-closing"
+        ]
+      },
+      {
+        "label": "Link Accounts",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      },
+      {
+        "label": "Backup",
+        "icon": "fa fa-fw fa-wrench",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/utils"
+        ]
+      },
+      {
+        "label": "Check List",
+        "icon": "fa fa-fw fa-gear",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/documentation"
+        ]
+      }
+    ]
+  }
+]

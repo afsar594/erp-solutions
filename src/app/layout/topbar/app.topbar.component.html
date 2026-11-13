@@ -1,0 +1,144 @@
+<div class="topbar">
+  <div class="topbar-main">
+    <div style="display: flex; align-items: center">
+      <a href="#" id="menu-button" (click)="toggleMenu()">
+        <span class="fa fa-bars"></span>
+      </a>
+
+      <a href="/">
+        <img alt="main logo" src="assets/Images/logo.png" class="logo" />
+      </a>
+
+      <div class="app-name">
+        <a href="/">{{
+          companyDetails?.stationMasterStationName | translate
+        }}</a>
+      </div>
+    </div>
+
+    <div
+      class="user-panel"
+      style="display: flex; align-content: flex-end; position: relative"
+    >
+      <app-translater
+        style="display: flex; align-items: center"
+      ></app-translater>
+
+      <!-- Notification Bell -->
+      <div
+        id="notification-bell"
+        style="position: relative; margin-right: 15px"
+        (click)="notificationService.toggleNotifications($event)"
+      >
+        <i
+          class="fa fa-bell"
+          style="
+            font-size: 20px;
+            cursor: pointer;
+            color: rgb(64, 207, 8);
+            margin: 7px 0 0 10px;
+          "
+        ></i>
+        <span
+          *ngIf="notificationService.unreadCount > 0"
+          style="
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            padding: 2px 6px;
+          "
+        >
+          {{ notificationService.unreadCount }}
+        </span>
+
+        <!-- Notification Dropdown -->
+        <div
+          *ngIf="notificationService.notificationsVisible"
+          style="
+            position: absolute;
+            right: 0;
+            top: 28px;
+            background: white;
+            padding: 0;
+            margin: 0;
+            width: 300px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+          "
+        >
+          <p-listbox
+            [options]="notificationService.notifications"
+            optionLabel="message"
+            [filter]="false"
+            (onChange)="notificationService.onNotificationSelected($event)"
+          >
+          </p-listbox>
+
+          <div
+            *ngIf="notificationService.notifications.length === 0"
+            style="padding: 10px; text-align: center; color: gray"
+          >
+            No new notifications
+          </div>
+        </div>
+      </div>
+
+      <!-- User Menu -->
+      <div id="user-display" (click)="app.onTopbarMenuButtonClick($event)">
+        <div style="margin: 0 4px">
+          <div class="username">{{ userData.userName | translate }}</div>
+        </div>
+        <img
+          alt="main logo"
+          [src]="'data:image/png;base64,' + userData.userImage"
+        />
+      </div>
+
+      <ul
+        id="topbar-menu"
+        class="fadeInDown animated"
+        [ngClass]="{ 'topbar-menu-visible': app.topbarMenuActive }"
+      >
+        <li
+          #profile
+          [ngClass]="{ 'menuitem-active': app.activeTopbarItem === profile }"
+        >
+          <a href="#" (click)="app.onTopbarItemClick($event, profile)">
+            <i class="topbar-icon fa fa-fw fa-user"></i>
+            <span class="topbar-item-name">PROFILE</span>
+          </a>
+          <ul>
+            <li>
+              <a href="#"><i class="fa fa-fw fa-user"></i>Profile</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-fw fa-user-secret"></i>Privacy</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-fw fa-cog"></i>Settings</a>
+            </li>
+            <li>
+              <a href="#" (click)="app.logout($event)"
+                ><i class="fa fa-fw fa-sign-out"></i>Logout</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li
+          #logout
+          [ngClass]="{ 'menuitem-active': app.activeTopbarItem === logout }"
+        >
+          <a href="#" (click)="app.logout($event)">
+            <i class="fa fa-fw fa-sign-out"></i>Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <app-menu [itemMenu]="items"></app-menu>
+</div>

@@ -1,0 +1,551 @@
+<!-- <div class='matero-page-header'>
+    <div class='matero-page-header-inner'>
+        <h2 class='matero-page-title'>{{title}} </h2>
+    </div>
+</div> -->
+<app-page-header
+  [nav]="[
+    { label: 'account' | translate },
+    { label: 'Outstanding Statement' | translate }
+  ]"
+  [title]="title | translate"
+></app-page-header>
+<p-toolbar>
+  <div class="ui-toolbar-group-left">
+    <button
+      pButton
+      type="button"
+      label="Show"
+      [disabled]="!Permission?.View"
+      (click)="ApplyAllFilter()"
+      icon="fa fa-search"
+      class="ui-button-success"
+    ></button>
+    <button
+      pButton
+      type="button"
+      (click)="displayPrint()"
+      label="Print"
+      [disabled]="!Permission?.Print"
+      icon="fa fa-print"
+      class="ui-button-info"
+    ></button>
+    <button
+      pButton
+      type="button"
+      (click)="Export2Excel()"
+      label="Export as Excel"
+      icon="fa fa-file-excel-o"
+      class="ui-button-info"
+    ></button>
+    <button
+      pButton
+      type="button"
+      (click)="Export2Word()"
+      label="Export as Word "
+      icon="fa fa-file-word-o"
+      class="ui-button-info"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="Close"
+      icon="fa fa-trash"
+      class="ui-button-danger"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="Exit"
+      (click)="ExitNew()"
+      icon="fa fa-sign-out"
+      class="ui-button-danger"
+    ></button>
+  </div>
+</p-toolbar>
+<div class="card card-w-title">
+  <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+    <p-tabPanel [header]="'Outstanding Statement'">
+      <div class="p-grid p-fluid">
+        <div class="p-col-12 p-md-5">
+          <p-panel>
+            <div class="p-grid p-ai-center">
+              <div class="p-col-12 p-md-3"></div>
+              <div class="p-col-12 p-md-9">
+                <p-radioButton
+                  [(ngModel)]="radioType"
+                  [style]="{ cursor: 'pointer' }"
+                  name="RadioType"
+                  value="Supplier"
+                >
+                </p-radioButton>
+                <label class="p-col-12 p-md-5" style="cursor: pointer"
+                  >Supplier</label
+                >
+                <span style="margin-left: 50px"></span
+                ><p-radioButton
+                  [(ngModel)]="radioType"
+                  [style]="{ cursor: 'pointer' }"
+                  name="RadioType"
+                  value="Customer"
+                >
+                </p-radioButton>
+                <label class="p-col-12 p-md-4" style="cursor: pointer"
+                  >Customer</label
+                >
+              </div>
+            </div>
+            <div *ngIf="radioType == 'Supplier'" class="p-grid p-ai-center">
+              <div class="p-col-12 p-md-3">
+                <label>Supplier Name</label>
+              </div>
+              <div class="p-col-12 p-md-9">
+                <p-dropdown
+                  filter="true"
+                  [options]="suppliers"
+                  placeholder="supplier"
+                  [(ngModel)]="selectedSupplier"
+                  (click)="resetSuppliersSelection()"
+                ></p-dropdown>
+              </div>
+            </div>
+            <div *ngIf="radioType == 'Customer'" class="p-grid p-ai-center">
+              <div class="p-col-12 p-md-3">
+                <label>Customer Name</label>
+              </div>
+              <div class="p-col-12 p-md-9">
+                <p-dropdown
+                  filter="true"
+                  [options]="customers"
+                  [(ngModel)]="selectedCustomer"
+                  placeholder="Customer"
+                  (click)="resetCustomerSelection()"
+                ></p-dropdown>
+              </div>
+            </div>
+
+            <div class="p-grid p-ai-center">
+              <div class="p-col-12 p-md-3"></div>
+              <div class="p-col-12 p-md-5">
+                <button
+                  type="button"
+                  (click)="ApplyAllFilter()"
+                  pButton
+                  label="Show Statement"
+                  filter="true"
+                  style="width: 100%; background-color: blueviolet"
+                ></button>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+        <div class="p-col-12 p-md-5">
+          <p-panel style="height: 130px">
+            <p-header>
+              <b style="color: rgb(179, 136, 219)">
+                Print With In Date The Range</b
+              >
+              <!-- <input type="checkbox" [(ngModel)]="isDateRange"> -->
+            </p-header>
+            <div class="p-grid p-ai-center">
+              <div class="p-col-12 p-md-1"></div>
+              <div class="p-col-12 p-md-4" style="margin-top: 5px">
+                <p-radioButton
+                  label="As On"
+                  [(ngModel)]="radioTypee"
+                  [style]="{ cursor: 'pointer' }"
+                  name="radioTypee"
+                  value="AsOn"
+                >
+                </p-radioButton>
+                <!-- <label style="cursor:pointer"></label> -->
+              </div>
+              <div class="p-col-12 p-md-6">
+                <p-radioButton
+                  label="Date Range"
+                  [(ngModel)]="radioTypee"
+                  [style]="{ cursor: 'pointer' }"
+                  name="radioTypee"
+                  value="DateRange"
+                >
+                </p-radioButton>
+                <!-- <label  style="cursor:pointer">Date Range</label> -->
+              </div>
+            </div>
+            <div class="p-grid p-ai-center" *ngIf="radioTypee === 'DateRange'">
+              <div class="p-col-12 p-md-2">
+                <label>From</label>
+              </div>
+              <div class="p-col">
+                <p-calendar
+                  appendTo="body"
+                  dateFormat="dd/mm/yy"
+                  [showButtonBar]="true"
+                  [monthNavigator]="true"
+                  [yearNavigator]="true"
+                  yearRange="2000:2040"
+                  useUtc
+                  showIcon="true"
+                  [(ngModel)]="startDate"
+                  style="width: 100%"
+                ></p-calendar>
+              </div>
+              <div class="p-col-12 p-md-2">
+                <label>To</label>
+              </div>
+              <div class="p-col">
+                <p-calendar
+                  appendTo="body"
+                  dateFormat="dd/mm/yy"
+                  [showButtonBar]="true"
+                  [monthNavigator]="true"
+                  [yearNavigator]="true"
+                  yearRange="2000:2040"
+                  useUtc
+                  showIcon="true"
+                  [(ngModel)]="endDate"
+                  style="width: 100%"
+                ></p-calendar>
+              </div>
+            </div>
+            <div class="p-grid p-ai-center" *ngIf="radioTypee === 'AsOn'">
+              <div class="p-col-12 p-md-2">
+                <label>As On</label>
+              </div>
+              <div class="p-col">
+                <p-calendar
+                  appendTo="body"
+                  dateFormat="dd/mm/yy"
+                  [showButtonBar]="true"
+                  [monthNavigator]="true"
+                  [yearNavigator]="true"
+                  yearRange="2000:2040"
+                  useUtc
+                  showIcon="true"
+                  [(ngModel)]="selectedAsOnDate"
+                  style="width: 120px"
+                ></p-calendar>
+              </div>
+              <!-- <div class="p-col-12 p-md-2">
+                            </div>
+                            <div class="p-col">
+                                <!-- <p-calendar   appendTo="body" dateFormat="dd/mm/yy" [showButtonBar]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2040" showIcon="true" [(ngModel)]="selectedAsOnDate" style="width: 120px;"></p-calendar>
+                             </div> -->
+            </div>
+
+            <!-- <div  class="p-grid"  *ngIf="radioType === 'Customer'" class="p-col-4 p-md-4 p-lg-4">
+                            <div class="p-col-2 p-md-2 p-lg-2">
+                                <label>From</label>
+                            </div>
+                            <div >
+                                <p-calendar   appendTo="body" dateFormat="dd/mm/yy" [showButtonBar]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2040" showIcon="true" [(ngModel)]="startDate"
+                        style="width: 100%;">
+                                </p-calendar>
+
+                            </div>
+                            <div class="p-col-2 p-md-2 p-lg-2">
+                                <label>To</label>
+                            </div>
+                            <div >
+                                <p-calendar   appendTo="body" dateFormat="dd/mm/yy" [showButtonBar]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2040" showIcon="true" [(ngModel)]="startDate"
+                        style="width: 100%;">
+                                </p-calendar>
+
+                            </div>
+                        </div> -->
+            <!-- <div  class="p-grid " *ngIf="radioType === 'Supplier'" >
+                            <p-calendar   appendTo="body" dateFormat="dd/mm/yy" [showButtonBar]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2040" [(ngModel)]="selectedAsOnDate" [showIcon]="true" style="width:100%">
+                            </p-calendar>
+                          
+                        </div> -->
+
+            <!-- <div *ngIf="!isDateRange" class="p-grid">
+                            <label *ngIf="!isDateRange" class="p-col-1 p-md-1 p-lg-1" for="account"
+                                style="color: brown;">
+                                <b>{{' As On' | translate}}</b>
+                            </label>
+                            <div *ngIf="!isDateRange" class="p-col-4 p-md-4 p-lg-4">
+                                <p-calendar   appendTo="body" dateFormat="dd/mm/yy" [showButtonBar]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2040" [(ngModel)]="selectedAsOnDate" [showIcon]="true" style="width:100%">
+                                </p-calendar>
+
+                            </div>
+                        </div> -->
+          </p-panel>
+        </div>
+        <div class="p-col-12 p-md-2">
+          <p-panel>
+            <p-header>
+              <b style="color: rgb(179, 136, 219)"> Formats</b>
+            </p-header>
+            <div class="p-grid p-ai-center">
+              <div class="p-col-12 p-md-12">
+                <p-radioButton
+                  [(ngModel)]="formatType"
+                  value="FormatOne"
+                  name="formatType"
+                  (click)="changeFormatType('FormatOne')"
+                >
+                </p-radioButton>
+                <label class="p-col-12 p-md-4" for="account">Format 1</label>
+              </div>
+              <div class="p-col-12 p-md-12">
+                <p-radioButton
+                  [(ngModel)]="formatType"
+                  value="FormatTwo"
+                  name="formatType"
+                  (click)="changeFormatType('FormatTwo')"
+                >
+                </p-radioButton>
+                <label for="account" class="p-col-12 p-md-4">Format 2</label>
+              </div>
+              <div class="p-col-12 p-md-12">
+                <p-radioButton
+                  [(ngModel)]="formatType"
+                  value="FormatThree"
+                  name="formatType"
+                  (click)="changeFormatType('FormatThree')"
+                >
+                </p-radioButton>
+                <label for="account" class="p-col-12 p-md-4">Format 3</label>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+  <div class="card card-w-title">
+    <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+      <p-tabPanel [header]="'Outstanding Statement'">
+        <div class="grid">
+          <div class="p-col-12">
+            <hot-table
+              [hotId]="hotid"
+              [data]="dataset"
+              [licenseKey]="licensekey"
+              [settings]="outstandingstatement"
+            >
+            </hot-table>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <div class="p-grid p-ai-center">
+    <div class="p-col-6 p-md-2">
+      <label>0-30</label>
+      <input
+        [(ngModel)]="ZeroToThirty"
+        pInputText
+        style="width: 70%; background-color: rgb(151, 236, 218)"
+      />
+    </div>
+    <div class="p-col-6 p-md-2">
+      <label>31-60</label>
+      <input
+        [(ngModel)]="ThirtyOneToSixty"
+        pInputText
+        style="width: 70%; background-color: rgb(103, 238, 209)"
+      />
+    </div>
+    <div class="p-col-6 p-md-2">
+      <label>61-90</label>
+      <input
+        [(ngModel)]="SixtyOneToNinety"
+        pInputText
+        style="width: 70%; background-color: rgb(16, 207, 166)"
+      />
+    </div>
+    <div class="p-col-6 p-md-2">
+      <label>91-180</label>
+      <input
+        [(ngModel)]="NinetyOneToOneEighty"
+        pInputText
+        style="width: 70%; background-color: rgb(34, 163, 135)"
+      />
+    </div>
+    <div class="p-col-6 p-md-2">
+      <label>181-360</label>
+      <input
+        [(ngModel)]="OneEightyToThreeSixty"
+        pInputText
+        style="width: 70%; background-color: rgb(28, 167, 137)"
+      />
+    </div>
+    <div class="p-col-6 p-md-2">
+      <label>Over 360</label>
+      <input
+        [(ngModel)]="aboveThreeSixty"
+        pInputText
+        style="width: 70%; background-color: rgb(243, 123, 94)"
+      />
+    </div>
+  </div>
+  <br /><br />
+</div>
+
+<p-dialog
+  header="Print Preview"
+  [(visible)]="displayPrintPreview"
+  [modal]="true"
+  [style]="{ width: '90%' }"
+  [maximizable]="true"
+  [baseZIndex]="100"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <button
+    pButton
+    type="button"
+    class="ui-button-primary"
+    label="Print"
+    (click)="printAsPDF()"
+    icon="fa fa-print"
+  ></button>
+  <div id="print">
+    <div class="print">
+      <div class="flex">
+        <div class="contain1">
+          <div class="center">
+            <!-- <img src="../../../../../assets/Images/logo-2.png" alt=""> -->
+            <img
+              *ngIf="stationmasterObj?.logotype != 'Rectangular'"
+              class="squreImg"
+              [src]="
+                'data:image/png;base64,' +
+                stationmasterObj?.stationMasterLogoImg
+              "
+            />
+            <img
+              *ngIf="stationmasterObj?.logotype == 'Rectangular'"
+              class="rectImg"
+              [src]="
+                'data:image/png;base64,' +
+                stationmasterObj?.stationMasterLogoImg
+              "
+            />
+          </div>
+        </div>
+
+        <div class="contain2">
+          <h2 class="namefont">
+            {{ stationmasterObj?.stationMasterStationName }}
+          </h2>
+          <div class="flexrow">
+            <div class="flexcol">
+              <b>{{ "Address" | translate }}</b>
+              <b class="spac1">{{ "Tel" | translate }} </b>
+              <b>{{ "Fax" | translate }} </b>
+              <b>{{ "Email" | translate }} </b>
+            </div>
+            <div class="flexcol">
+              <div>&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</div>
+              <div class="spac1">&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</div>
+              <div>&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</div>
+              <div>&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</div>
+            </div>
+            <div class="flexcol">
+              <div>{{ stationmasterObj?.stationMasterAddress }}</div>
+              <div class="spac1">
+                {{ stationmasterObj?.stationMasterTele1 }}
+              </div>
+              <div>{{ stationmasterObj?.stationMasterFax }}</div>
+              <div>{{ stationmasterObj?.stationMasterEmail }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 class="ab">Outstanding Details</h3>
+      <!-- <h3 class="ab">{{currentDate | date:'dd/MM/yyyy'}}</h3> -->
+      <div class="second">
+        <div class="row">
+          <h4 class="ad">
+            As on date :{{ selectedAsOnDate | date : "dd/MM/yyyy" }}
+          </h4>
+          <!-- <h4 class="ae">As on date. :   </h4> -->
+        </div>
+
+        <!-- <div style="display: flex;">
+                    <h4 class="ad">Acc. No :  
+                    </h4>
+                </div> -->
+      </div>
+      <table class="customers1">
+        <tr>
+          <th>Trans Date</th>
+          <th>Voucher No</th>
+          <th>Customer</th>
+          <th>Ref No</th>
+          <th>Amount</th>
+          <th>Settled</th>
+          <th>Balance</th>
+          <th>Running Bal</th>
+        </tr>
+        <tr *ngFor="let item of dataset">
+          <td>{{ item?.accountsTransactionsTransDateString }}</td>
+          <td>{{ item?.accountsTransactionsVoucherNo }}</td>
+          <td>{{ item?.accountsTransactionsAccName }}</td>
+          <td>{{ item?.refNo }}</td>
+          <td>
+            {{
+              item?.accountsTransactionsAllocDebit +
+              item?.accountsTransactionsAllocBalance
+                ? item?.accountsTransactionsAllocDebit +
+                  item?.accountsTransactionsAllocBalance
+                : null
+            }}
+          </td>
+          <td>{{ item?.accountsTransactionsAllocDebit | number : "1.2-2" }}</td>
+          <td>
+            {{ item?.accountsTransactionsAllocBalance | number : "1.2-2" }}
+          </td>
+          <td>
+            {{ item?.accountstransactionsRunningBalance | number : "1.2-2" }}
+          </td>
+        </tr>
+      </table>
+      <!-- <p>A E D</p> -->
+
+      <br /><br />
+      <table class="customers">
+        <tr>
+          <th
+            style="background-color: green; text-align: center; color: white"
+            colspan="6"
+          >
+            Ageing Details
+          </th>
+        </tr>
+        <tr>
+          <th>0-31</th>
+          <th>31-60</th>
+          <th>61-90</th>
+          <th>91-180</th>
+          <th>181-360</th>
+          <th>360</th>
+        </tr>
+        <tr>
+          <td>
+            {{ listResponse?.zeroToThirty }}
+          </td>
+          <td>
+            {{ listResponse?.thirtyOneToSixty }}
+          </td>
+          <td>
+            {{ listResponse?.sixtyOneToNinety }}
+          </td>
+          <td>
+            {{ listResponse?.ninetyOneToOneEighty }}
+          </td>
+          <td>
+            {{ listResponse?.oneEightyToThreeSixty }}
+          </td>
+          <td>
+            {{ listResponse?.aboveThreeSixty }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!-- </div> -->
+</p-dialog>

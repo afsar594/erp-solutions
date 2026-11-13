@@ -1,0 +1,63 @@
+<app-page-header [title]="title | translate"></app-page-header>
+<p-toolbar>
+  <div class="ui-toolbar-group-left">
+    <button
+      pButton
+      type="button"
+      [label]="'Save'"
+      (click)="updateSettings()"
+      icon="fa fa-floppy-o"
+      class="ui-button-success"
+    ></button>
+  </div>
+</p-toolbar>
+<!-- (click)='updateSettings()'-->
+
+<div class="card card-w-title">
+  <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+    <p-tabPanel [header]="'Account Settings' | translate">
+      <p-table [value]="list3">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="th1">Description</th>
+            <th>Value</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+          <tr>
+            <td>
+              {{ data.accountSettingsAccountDescription }}
+            </td>
+            <td>
+              <!-- {{data.accountSettingsAccountTextValue}}
+                                    <p-dropdown filter="true" class="w-100"  [(ngModel)]="data.accountSettingsAccountTextValue" 
+                                    [options]="data.options">
+                                </p-dropdown> -->
+              <!-- <p-dropdown filter="true" [options]="data.options" [(ngModel)]="data.accountSettingsAccountTextValue" placeholder="----Select----" [virtualScroll]="true" [itemSize]="31" [filter]="true"></p-dropdown> -->
+              <!-- {{data.accountSettingsAccountTextValue}}  -->
+              <p-dropdown
+                filter="true"
+                [options]="data.options"
+                [(ngModel)]="data.accountSettingsAccountTextValue"
+                optionLabel="keyText"
+                dataKey="keyValue"
+                [filter]="true"
+              >
+              </p-dropdown>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+
+<p-toast></p-toast>
+
+<p-confirmDialog
+  key="confirm-key"
+  acceptLabel="Yes"
+  rejectLabel="No"
+  header="Confirm"
+  [(visible)]="confirmDropDatabaseDialogVisible"
+></p-confirmDialog>

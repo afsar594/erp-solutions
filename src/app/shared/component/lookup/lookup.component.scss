@@ -1,0 +1,66 @@
+tr {
+    cursor: pointer;
+    &:hover {
+        border: 1px solid #b1c6d9;
+        box-shadow: 0px 0px 2px 0px black;
+    }
+}
+.center-text {
+    text-align: center;
+  }
+
+
+  .flexSearch i{
+    padding: 5px;
+    padding-left: 15px;
+  }
+
+  /* Ensure the dialog width adjusts dynamically based on table content */
+:host ::ng-deep .p-dialog {
+  width: auto !important;
+  max-width: 95vw;
+  min-width: 20vw;
+}
+
+/* Force table to adjust to content */
+:host ::ng-deep .p-datatable {
+  width: auto !important;
+  display: table;
+}
+
+/* Override table layout to use content-based sizing */
+:host ::ng-deep .p-datatable-table {
+  table-layout: auto !important;
+  width: auto !important;
+}
+
+/* Ensure header and body cells respect content width */
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th,
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.5rem;
+  white-space: nowrap !important; /* Prevent wrapping */
+  text-align: center;
+  width: auto !important; /* Explicitly set width to auto */
+  min-width: 0 !important; /* Allow columns to shrink */
+}
+
+/* Prevent table wrapper from constraining width */
+:host ::ng-deep .p-datatable-wrapper {
+  overflow-x: auto;
+  width: auto !important;
+  min-width: 0 !important;
+}
+
+/* Flex container for search input */
+.flexSearch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+/* Ensure search input width is reasonable */
+:host ::ng-deep .p-inputtext {
+  width: 100%;
+  max-width: 600px;
+}

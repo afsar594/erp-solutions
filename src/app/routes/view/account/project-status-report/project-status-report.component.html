@@ -1,0 +1,59 @@
+<app-page-header [title]='title| translate'></app-page-header>
+<p-toolbar>
+    <div class="ui-toolbar-group-left">
+        <!-- <button pButton type="button" label="Show" icon="fa fa-search" class="ui-button-info"></button> -->
+        <button pButton type="button" (click)='List_REPORT()' label="Show"
+        icon="fa fa-list"></button>
+
+        <button pButton type="button" label="Clear Selection" (click)="new()" icon="fa fa-ban" class="ui-button-danger"></button>
+        <button pButton type="button" label="Exit" (click)="ExitNew()" icon="fa fa-sign-out" class="ui-button-warning"></button>
+        <!-- <button pButton type="button" label="Excel" icon="fa fa-file-excel-o" class="ui-button-success"></button> -->
+    </div>
+</p-toolbar>
+<div class="card card-w-title">
+    <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+        <p-tabPanel [header]="'Project Status Report' | translate">
+            <br>
+            <div class="p-grid"  [formGroup]="reportProjectStatusFormGroup">
+                <label class="p-col-12 p-md-4 p-lg-1" for="account">
+                    {{'Customer:' | translate}}
+                </label>
+                <div class="p-col-12 p-md-8 p-lg-4">
+                    <!-- <p-dropdown filter="true"   placeholder="Customer"></p-dropdown>   -->
+                    <p-dropdown filter="true" [options]="customerList" id="rptCustomerId"  formControlName="rptCustomerId" 
+                    [showClear]="true" >
+                  </p-dropdown>
+                </div>
+
+                <label class="p-col-12 p-md-4 p-lg-1" for="account">
+                    {{'Job:' | translate}}
+                </label>
+                <div class="p-col-12 p-md-8 p-lg-4">
+                    <!-- <p-dropdown filter="true"  placeholder="Select Job"></p-dropdown> -->
+                    <p-dropdown filter="true" class="w-100" formControlName='rptJob' id="rptJob"  [options]="jobList"
+                    >
+                </p-dropdown>
+                 </div>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+    <br>
+    <div class="card card-w-title">
+        <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+            <p-tabPanel [header]="'Details' | translate">
+               
+                <div class="grid">
+                    <div class="p-col-12">
+                        <div class="table-header">
+                            <!-- <div class="header">ACORTEC STRUCTURAL STEEL COATING & TREATMENT LLC</div> -->
+                            <div class="sub-header">PROJECT STATUS REPORT</div>
+                          </div>
+                        <hot-table [hotId]="hotid" [data]=" dataset" [licenseKey]="licensekey"
+                            [settings]="projectstatusreport">
+                        </hot-table>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

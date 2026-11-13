@@ -1,0 +1,326 @@
+<app-page-header [title]="title | translate"></app-page-header>
+<p-panel [header]="'Filter' | translate">
+  <div [formGroup]="ItemFormGroup" class="p-grid">
+    <div class="p-col-12 p-md-12 p-lg-4">
+      <div class="card card-w-title">
+        <div class="p-grid">
+          <div class="p-col-12 p-md-12 p-lg-4">
+            <label for="">Item : </label>
+          </div>
+          <div class="p-col-12 p-md-12 p-lg-8">
+            <p-dropdown
+              filter="true"
+              (onChange)="ChangeItem()"
+              formControlName="ItemName"
+              [filter]="true"
+              placeholder="ALL"
+              filterValue="itemMasterItemName"
+              [showClear]="true"
+              dataKey="itemMasterItemId"
+              autoWidth="false"
+              [options]="ItemMasterArray"
+              optionLabel="itemMasterItemName"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="p-grid">
+          <div class="p-col-12 p-md-12 p-lg-4">
+            <label for="">Department : </label>
+          </div>
+          <div class="p-col-12 p-md-12 p-lg-8">
+            <p-dropdown
+              filter="true"
+              formControlName="DepId"
+              [filter]="true"
+              placeholder="ALL"
+              filterValue="departmentMasterDepartmentName"
+              [showClear]="true"
+              dataKey="departmentMasterDepartmentId"
+              autoWidth="false"
+              [options]="DepartmentMasterArray"
+              optionLabel="departmentMasterDepartmentName"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col-12 p-md-12 p-lg-4">
+            <label for="">Job : </label>
+          </div>
+          <div class="p-col-12 p-md-12 p-lg-8">
+            <p-dropdown
+              filter="true"
+              formControlName="Job"
+              [filter]="true"
+              placeholder="ALL"
+              filterValue="jobMasterJobName"
+              [showClear]="true"
+              autoWidth="false"
+              [options]="jobList"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-12 p-lg-5">
+      <div class="card card-w-title">
+        <div class="p-grid">
+          <label class="p-col-12 p-md-12 p-lg-3" for="">By Date : </label>
+          <div class="p-col-12 p-md-12 p-lg-9">
+            <p-checkbox formControlName="isDate" [binary]="true"></p-checkbox>
+          </div>
+        </div>
+        <div class="p-grid inputGroup">
+          <div class="p-col-12 p-md-12 p-lg-3">
+            <label for="itemName">From :</label>
+          </div>
+          <div class="p-col-12 p-md-12 p-lg-9">
+            <p-calendar
+              appendTo="body"
+              dateFormat="dd/mm/yy"
+              [showButtonBar]="true"
+              [monthNavigator]="true"
+              [yearNavigator]="true"
+              yearRange="2000:2040"
+              showIcon="true"
+              useUtc
+              formControlName="DateFrom"
+              class="w-200"
+              [disabled]="!ItemFormGroup.get('isDate').value"
+            >
+            </p-calendar>
+          </div>
+        </div>
+        <div class="p-grid inputGroup">
+          <div class="p-col-12 p-md-12 p-lg-3">
+            <label for="itemName">To :</label>
+          </div>
+          <div class="p-col-12 p-md-12 p-lg-9">
+            <p-calendar
+              appendTo="body"
+              dateFormat="dd/mm/yy"
+              [showButtonBar]="true"
+              [monthNavigator]="true"
+              [yearNavigator]="true"
+              yearRange="2000:2040"
+              showIcon="true"
+              useUtc
+              formControlName="DateTo"
+              class="w-200"
+              [disabled]="!ItemFormGroup.get('isDate').value"
+            >
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-12 p-lg-3">
+      <div class="card card-w-title">
+        <div class="p-grid">
+          <div class="p-col-12 p-md-12 p-lg-4">
+            <label for="">Details : </label>
+          </div>
+          <div class="p-col-12 p-md-12 p-lg-8">
+            <p-radioButton
+              value="details"
+              formControlName="Type"
+              name="details"
+            ></p-radioButton>
+          </div>
+        </div>
+        <!-- <div class="p-grid">
+                    <div class="p-col-12 p-md-12 p-lg-4">
+                        <label>detailsjob : </label>
+                    </div>
+                    <div class="p-col-12 p-md-12 p-lg-8">
+                        <p-radioButton value="detailsjob" formControlName="Type"></p-radioButton>
+                    </div>
+                </div> -->
+        <div class="p-grid">
+          <div class="p-col-12 p-md-12 p-lg-4">
+            <label for="">Job Wise : </label>
+          </div>
+          <div class="p-col-12 p-md-12 p-lg-8">
+            <p-radioButton
+              value="jobwise"
+              formControlName="Type"
+              name="details"
+            ></p-radioButton>
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col-12">
+            <button
+              pButton
+              type="button"
+              label="Find"
+              (click)="GenerateReport()"
+              icon="fa fa-search"
+              class="ui-button-info"
+            ></button>
+            <button
+              pButton
+              type="button"
+              label="Print"
+              (click)="onPrint()"
+              icon="fa fa-print"
+              class="p-button-secondary"
+            ></button>
+            <button
+              pButton
+              class="ui-button-warning"
+              (click)="onClear()"
+              label="Clear"
+            ></button>
+            <button
+              pButton
+              type="button"
+              class="ui-button-danger"
+              (click)="ExitNew()"
+              label="Exit"
+              icon="fa fa-close"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> </p-panel
+>p
+<p-tabView>
+  <p-tabPanel
+    [header]="
+      this.ItemFormGroup.controls.Type.value == 'details'
+        ? 'Detail Wise Report'
+        : this.ItemFormGroup.controls.Type.value == 'jobwise'
+        ? 'Job Wise Report'
+        : 'Summary Wise Report'
+    "
+  >
+    <div
+      *ngIf="this.ItemFormGroup.controls.Type.value == 'details'"
+      id="detailPrint"
+      class="p-grid"
+    >
+      <!-- <div class="p-col-12">
+                <h3><b>Detail Wise Report</b></h3>
+            </div> -->
+      <div class="p-col-12">
+        <p-table [value]="this.DetailWiseIssueReport">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Issue No</th>
+              <th>Issue Date</th>
+              <th>Part No</th>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Rate</th>
+              <th>Amount</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr>
+              <td>{{ item.issueNo }}</td>
+              <td>{{ item.issueDate | date : "dd/MM/yyyy" }}</td>
+              <td>{{ item.partNo }}</td>
+              <td>{{ item.itemName }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.rate }}</td>
+              <td>{{ item.amount }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <div
+      *ngIf="this.ItemFormGroup.controls.Type.value == 'jobwise'"
+      id="jobwisePrint"
+      class="p-grid"
+    >
+      <!-- <div class="p-col-12">
+                <h3><b>Job Wise Report</b></h3>
+            </div> -->
+      <div class="p-col-12">
+        <p-table [value]="this.JobWiseIssueReport">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Job</th>
+              <th>Job No</th>
+              <th>Issue No</th>
+              <th>Issue Date</th>
+              <th>Part No</th>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Rate</th>
+              <th>Amount</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr>
+              <td>
+                {{
+                  getJobName(HIDEJOBCOST ? item.detailjobId : item.jobNumber)
+                }}
+              </td>
+              <td>{{ HIDEJOBCOST ? item.detailjobId : item.jobNumber }}</td>
+              <td>{{ item.issueNo }}</td>
+              <td>{{ item.issueDate | date : "dd/MM/yyyy" }}</td>
+              <td>{{ item.partNo }}</td>
+              <td>{{ item.itemName }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.rate }}</td>
+              <td>{{ item.amount }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <div
+      *ngIf="this.ItemFormGroup.controls.Type.value == 'summary'"
+      id="summaryPrint"
+      class="p-grid"
+    >
+      <!-- <div class="p-col-12">
+                <h3><b>Summary Wise Report</b></h3>
+            </div> -->
+      <div class="p-col-12">
+        <p-table [value]="_ReportService.SummaryWiseIssueReport">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Job</th>
+              <th>Job No</th>
+              <th>Issue No</th>
+              <th>Issue Date</th>
+              <th>Part No</th>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Rate</th>
+              <th>Amount</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr>
+              <td>
+                {{
+                  getJobName(!HIDEJOBCOST ? item.detailjobId : item.jobNumber)
+                }}
+              </td>
+              <td>{{ !HIDEJOBCOST ? item.detailjobId : item.jobNumber }}</td>
+              <td>{{ item.issueNo }}</td>
+              <td>{{ item.issueDate | date : "dd/MM/yyyy" }}</td>
+              <td>{{ item.partNo }}</td>
+              <td>{{ item.itemName }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.rate }}</td>
+              <td>{{ item.amount }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>

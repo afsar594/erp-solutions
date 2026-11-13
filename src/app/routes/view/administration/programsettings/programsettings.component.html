@@ -1,0 +1,147 @@
+<app-page-header [title]='title| translate'></app-page-header>
+<p-toolbar>
+
+    <div class="ui-toolbar-group-right">
+        <button pButton type="button" [label]="'Save'" icon="fa fa-floppy-o" (click)='updateSettings()'
+            class="ui-button-success"></button>
+
+        <button pButton type="button" [label]="'Exit'" icon="fa fa-sign-out" (click)='ExitNew()'
+            class="ui-button-warn"></button>
+    </div>
+</p-toolbar>
+<div class="p-grid w-100">
+    <div class="p-col-12">
+        <p-tabView>
+            <p-tabPanel header="Menu Settings">
+                <p-table [value]="list">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="th1">Description</th>
+                            <th>Value</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-data>
+                        <tr>
+                            <td>{{data.programSettingsDescription}}</td>
+                            <td>
+                                <div *ngIf="data.programSettingsValueType === 'BOOLEAN'">
+                                    <p-checkbox *ngIf="data.programSettingsBoolValue" label="YES" name="group1"
+                                        binary="true" [(ngModel)]="data.programSettingsBoolValue">
+                                    </p-checkbox>
+                                    <p-checkbox *ngIf="!data.programSettingsBoolValue" label="NO" name="group1"
+                                        binary="true" [(ngModel)]="data.programSettingsBoolValue">
+                                    </p-checkbox>
+
+                                </div>
+
+                                <div *ngIf="data.programSettingsValueType === 'NUMERIC'">
+                                    <p-inputNumber [(ngModel)]="data.programSettingsNumValue"></p-inputNumber>
+                                </div>
+
+                                <div *ngIf="data.programSettingsValueType === 'TEXT'">
+                                    <input type="text" pInputText [(ngModel)]="data.programSettingsTextValue" />
+                                </div>
+                                <div *ngIf="data.programSettingsValueType === 'FILE|'">
+                                    <p-dropdown filter="true" [options]="data.options" optionLabel="keyText" dataKey="keyValue"
+                                        [(ngModel)]="data.generalSettingsTextValue" [filter]="true" [showClear]="true">
+                                    </p-dropdown>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Voucher Settings">
+                <p-table [value]="list2">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="th1">Description</th>
+                            <th>Value</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-data>
+                        <tr>
+                            <td>{{data.programSettingsDescription}}</td>
+                            <td>
+                                <div *ngIf="data.programSettingsValueType === 'BOOLEAN'">
+                                    <p-checkbox *ngIf="data.programSettingsBoolValue" label="YES" name="group1"
+                                        binary="true" [(ngModel)]="data.programSettingsBoolValue">
+                                    </p-checkbox>
+                                    <p-checkbox *ngIf="!data.programSettingsBoolValue" label="NO" name="group1"
+                                        binary="true" [(ngModel)]="data.programSettingsBoolValue">
+                                    </p-checkbox>
+                                </div>
+
+                                <div *ngIf="data.programSettingsValueType === 'NUMERIC'">
+                                    <p-inputNumber [(ngModel)]="data.programSettingsNumValue"></p-inputNumber>
+                                </div>
+
+                                <div *ngIf="data.programSettingsValueType === 'TEXT'">
+                                    <input type="text" pInputText [(ngModel)]="data.programSettingsTextValue" />
+                                </div>
+                                <div *ngIf="data.programSettingsValueType === 'FILE|'">
+                                    <p-dropdown filter="true" [options]="data.options" optionLabel="keyText" dataKey="keyValue"
+                                        [(ngModel)]="data.generalSettingsTextValue" [filter]="true" [showClear]="true">
+                                    </p-dropdown>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="General Settings">
+                <p-table [value]="list3">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="th1">Description</th>
+                            <th>Value</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-data>
+                        <tr>
+                            <td>{{data.programSettingsDescription}}</td>
+                            <td>
+                                <div *ngIf="data.programSettingsValueType === 'BOOLEAN'">
+                                    <p-checkbox *ngIf="data.programSettingsBoolValue" label="YES" name="group1"
+                                        binary="true" [(ngModel)]="data.programSettingsBoolValue">
+                                    </p-checkbox>
+                                    <p-checkbox *ngIf="!data.programSettingsBoolValue" label="NO" name="group1"
+                                        binary="true" [(ngModel)]="data.programSettingsBoolValue">
+                                    </p-checkbox>
+                                </div>
+
+                                <div *ngIf="data.programSettingsValueType === 'NUMERIC'">
+                                    <p-inputNumber [(ngModel)]="data.programSettingsNumValue"></p-inputNumber>
+                                </div>
+
+                                <div *ngIf="data.programSettingsValueType === 'TEXT'">
+                                    <input type="text" pInputText [(ngModel)]="data.programSettingsTextValue" />
+                                </div>
+                                <div *ngIf="data.programSettingsValueType === 'FILE|'">
+                                    <p-dropdown filter="true" [options]="data.options" optionLabel="keyText" dataKey="keyValue"
+                                        [(ngModel)]="data.generalSettingsTextValue" [filter]="true" [showClear]="true">
+                                    </p-dropdown>
+                                </div>
+                                <div *ngIf="data.programSettingsValueType === 'FILE' && data.programSettingsKeyValue === 'PREFIX_CLOSING_TYPE'">
+
+                                    <p-dropdown filter="true" [(ngModel)]="data.programSettingsTextValue" class="w-100 "
+                                        [options]="PREFIXType">
+                                    </p-dropdown>
+                                </div>
+                                <div *ngIf="data.programSettingsValueType === 'FILE' && data.programSettingsKeyValue === 'PREFIX_SEPERATOR'">
+
+                                    <p-dropdown filter="true" [(ngModel)]="data.programSettingsTextValue" class="w-100 "
+                                        [options]="PREFIXSeprator">
+                                    </p-dropdown>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+
+</div>
+
+<p-toast></p-toast>

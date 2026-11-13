@@ -1,0 +1,42 @@
+<p-dialog [header]="header"
+  (onShow)="handleDialogShow()" [modal]="true" (onHide)="Exit(false);" [(visible)]="show"
+  [baseZIndex]="10000" 
+  [autoZIndex]="true"      
+  [focusOnShow]="false">
+    <!-- <div class="toolbar">
+        <div style="float: right;">
+            <button pButton type="button" label="Exit" (click)="Exit()" icon="fa fa-sign-out"></button>
+            <button pButton type="button" label="Close" (click)="Exit()" icon="pi pi-times"></button>
+        </div>
+    </div> -->
+    <div>
+        <p-table #dt2 [value]="dataArry" selectionMode="single" (onRowClick)="selectItem($event.data)"
+            [(selection)]="selectedItem" [globalFilterFields]="keys" (keydown)="onTableKeyDown($event)" [autoLayout]="true">
+            <ng-template pTemplate="caption">
+                <div class="flexSearch" style="text-align: left">
+                    <!-- Changed: Added (keydown) event binding -->
+                    <input #myInput type="text" pInputText [(ngModel)]="searchText" size="50"
+                        (input)="onInputChange($event.target.value)" (keydown.enter)="onSearch()"
+                        (keydown)="onKeyDown($event)"
+                        placeholder="Global Filter" (input)="$event.target.value != '' && $event.target.value != null ? 
+                        dt2.filterGlobal($event.target.value, 'contains') : null" style="width:90%" />
+                    <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <ng-container *ngFor="let data of columns">
+                        <th>{{data}}</th>
+                    </ng-container>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-data>
+                <tr [pSelectableRow]="data">
+                    <ng-container *ngFor="let item of data | keyvalue">
+                        <td (click)="selectItem(data)" class="center-text">{{item.value}}</td>
+                    </ng-container>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</p-dialog>

@@ -1,0 +1,696 @@
+<app-page-header *ngIf="listmode" [title]="title | translate"></app-page-header>
+
+<div
+  class="modern-ui-container"
+  [formGroup]="newitemForm"
+  [ngStyle]="{ 'background-color': listmode ? '#f8fafc' : 'white' }"
+>
+  <!-- Header -->
+  <div class="ui-header" *ngIf="listmode">
+    <div class="header-content">
+      <div class="ui-toolbar-group-left">
+        <button
+          pButton
+          type="button"
+          label="New"
+          icon="pi pi-plus"
+          (click)="new()"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Edit"
+          icon="fa fa-pencil"
+          [disabled]="!btnFlag.edit || !Permission?.Edit"
+          class="ui-button-success"
+          (click)="edit()"
+        ></button>
+
+        <button
+          pButton
+          type="button"
+          class="ui-button-danger"
+          [disabled]="!btnFlag?.cancel"
+          label="Cancel"
+          (click)="cancel()"
+          icon="fa fa-ban"
+        ></button>
+        <button
+          pButton
+          type="button"
+          [disabled]="btnFlag.edit || !Permission?.Add"
+          [label]="btnFlag?.save == true ? 'Save' : 'Update'"
+          icon="fa fa-floppy-o"
+          (click)="saveItem()"
+          class="ui-button-success"
+        ></button>
+
+        <button
+          pButton
+          type="button"
+          label="List"
+          [disabled]="!Permission?.View"
+          icon="fa fa-list"
+          (click)="onClickTemplateList(false)"
+          class="ui-button-info"
+        ></button>
+        <!-- routerLink="/master/item/list" -->
+        <button
+          pButton
+          type="button"
+          class="ui-button-danger"
+          [disabled]="!btnFlag.delete || !Permission?.Delete"
+          (click)="delete()"
+          label="Delete"
+          icon="fa fa-trash"
+        ></button>
+      </div>
+
+      <div class="ui-toolbar-group-right">
+        <button
+          pButton
+          type="button"
+          label="Browse Template"
+          icon="fa fa-plus"
+          (click)="onClickTemplateList(true)"
+          class="ui-button-success"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Back"
+          (click)="navigateBack()"
+          icon="fa fa-sign-out"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="left-section">
+      <!-- Basic Info PANEL -->
+      <p-panel>
+        <p-header>
+          {{ "Basic Information" | translate }}
+        </p-header>
+
+        <div class="min-panel">
+          <!-- Group -->
+          <div class="p-grid inputGroup">
+            <label class="p-col-12 p-md-12 p-lg-2" for="groupname">
+              {{ "Group" | translate }} <span class="required">*</span>
+            </label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <div class="p-inputgroup">
+                <input
+                  type="text"
+                  #acctCtrl
+                  pInputText
+                  placeholder="Search group..."
+                  class="w-100"
+                />
+                <button
+                  pButton
+                  type="button"
+                  icon="pi pi-search"
+                  (click)="openAccount()"
+                  class="p-button-outlined"
+                ></button>
+              </div>
+            </div>
+            <!-- </div> -->
+
+            <!-- Stock Type -->
+            <!-- <div class="p-grid inputGroup"> -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="stockType">{{
+              "Stock Type" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <p-dropdown
+                filter="true"
+                formControlName="itemMasterStockType"
+                [options]="ItemStockList"
+                placeholder="Choose stock type..."
+                class="w-100"
+              ></p-dropdown>
+            </div>
+            <!-- </div> -->
+
+            <!-- Brand -->
+            <!-- <div class="p-grid inputGroup"> -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="brand">{{
+              "Brand" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <div class="p-inputgroup">
+                <input
+                  type="text"
+                  #brandCtrl
+                  formControlName="itemMasterVenderId"
+                  pInputText
+                  placeholder="Select brand..."
+                  class="w-100"
+                />
+                <button
+                  pButton
+                  icon="pi pi-search"
+                  (click)="openBrand()"
+                  class="p-button-outlined"
+                ></button>
+              </div>
+            </div>
+            <!-- </div> -->
+
+            <!-- Arabic Name -->
+            <!-- <div class="p-grid inputGroup"> -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="arabName">{{
+              "Arabic Name" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                type="text"
+                id="arabName"
+                pInputText
+                placeholder="Enter Arabic name..."
+                class="w-100"
+              />
+            </div>
+            <!-- </div> -->
+
+            <!-- Supplier -->
+            <!-- <div class="p-grid inputGroup"> -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="supplier">{{
+              "Supplier" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <div class="p-inputgroup">
+                <input
+                  type="text"
+                  #supplierCtrl
+                  formControlName="itemMasterSupplierId"
+                  pInputText
+                  placeholder="Select supplier..."
+                  class="w-100"
+                />
+                <button
+                  pButton
+                  icon="pi pi-search"
+                  (click)="openSupplier()"
+                  class="p-button-outlined"
+                ></button>
+              </div>
+            </div>
+            <!-- </div> -->
+
+            <!-- Item Name -->
+            <!-- <div class="p-grid inputGroup"> -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="item">
+              {{ "Item Name" | translate }} <span class="required">*</span>
+            </label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <textarea
+                formControlName="itemMasterItemName"
+                (keyup)="onKeyUp($event.target.value)"
+                pInputTextarea
+                placeholder="Enter item name..."
+                rows="3"
+                class="w-100"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- SPECIFICATIONS PANEL -->
+      <p-panel>
+        <p-header>{{ "Specifications" | translate }}</p-header>
+
+        <div class="min-panel">
+          <!-- Material Code -->
+          <div class="p-grid inputGroup">
+            <label class="p-col-12 p-md-12 p-lg-2" for="materialCode">{{
+              "Material Code" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                type="text"
+                formControlName="itemMasterMaterialCode"
+                id="materialCode"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Part No -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="partNo">{{
+              "Part No" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                formControlName="itemMasterPartNo"
+                id="partNo"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Item Size -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="itemSize">{{
+              "Item Size" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                formControlName="itemMasterItemSize"
+                id="itemSize"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Color -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="color">{{
+              "Color" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                formControlName="itemMasterColor"
+                id="color"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Shape -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="shape">{{
+              "Shape" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                formControlName="itemMasterShape"
+                id="shape"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Packing -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="packing">{{
+              "Packing" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                formControlName="itemMasterPacking"
+                id="packing"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Ref -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="ref">{{
+              "Ref" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                id="ref"
+                formControlName="itemMasterRef"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Ref. 1 -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="ref1">{{
+              "Ref. 1" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                id="ref1"
+                formControlName="itemMasterRef1"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Ref. 2 -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="ref2">{{
+              "Ref. 2" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                id="ref2"
+                formControlName="itemMasterRef2"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Entry Person -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="entryperson">{{
+              "Entry Person" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                id="entryperson"
+                formControlName="itemMasterUserId"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Re-order Level -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="reorder">{{
+              "Re-order Level" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                id="reorder"
+                formControlName="itemMasterReOrderLevel"
+                pInputText
+                class="w-100"
+              />
+            </div>
+            <!-- Landing Cost -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="landingCost">{{
+              "Landing Cost" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                id="landingCost"
+                formControlName="itemMasterLandingCost"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- Stock -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="stock">{{
+              "Stock" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <input
+                id="stock"
+                formControlName="itemMasterCurrentStock"
+                pInputText
+                class="w-100"
+              />
+            </div>
+
+            <!-- VAT % -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="vat">{{
+              "VAT %" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <p-dropdown
+                filter="true"
+                id="vat"
+                formControlName="itemMasterVat"
+                [options]="taxMasterList"
+                class="w-100"
+              ></p-dropdown>
+            </div>
+
+            <!-- Inclusive Tax -->
+            <label class="p-col-12 p-md-12 p-lg-2" for="inclusiveTax">{{
+              "Inclusive Tax" | translate
+            }}</label>
+            <div class="p-col-12 p-md-12 p-lg-4 p-0">
+              <p-checkbox
+                id="inclusiveTax"
+                [binary]="true"
+                formControlName="itemMasterInclusiveTax"
+              ></p-checkbox>
+            </div>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+    <!-- Right Section -->
+    <div class="right-section">
+      <p-panel>
+        <p-header>{{ "Product Image" | translate }}</p-header>
+        <div class="card-body">
+          <div>
+            <img
+              [src]="
+                newitemForm.controls.itemMasterImageBase64.value != null
+                  ? newitemForm.controls.itemMasterImageBase64.value
+                  : '../../../../../../assets/components/images/item.png'
+              "
+              class="product-image"
+            />
+            <div>
+              <input
+                type="file"
+                (change)="onSelectFile($event)"
+                class="file-input"
+                id="fileInput"
+              />
+              <label for="fileInput" class="upload-btn">
+                <i class="pi pi-upload"></i>
+                Upload Image
+              </label>
+            </div>
+
+            <div
+              *ngIf="
+                newitemForm.controls.itemMasterImageBase64.value &&
+                btnFlag?.update
+              "
+            >
+              <button
+                pButton
+                icon="pi pi-trash"
+                (click)="UpdateItemByImg()"
+                class="p-button-danger p-button-sm"
+                pTooltip="Delete"
+              ></button>
+              <button
+                pButton
+                icon="pi pi-download"
+                (click)="downloadImage()"
+                class="p-button-success p-button-sm"
+                pTooltip="Download Image"
+              ></button>
+              <button
+                pButton
+                icon="pi pi-file-pdf"
+                (click)="downloadImageBypdf()"
+                class="p-button-help p-button-sm"
+                pTooltip="Download PDF"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </p-panel>
+      <!-- Supplier Information -->
+      <p-panel>
+        <p-header>{{ "Supplier Information" | translate }}</p-header>
+
+        <div class="card-body">
+          <div class="table-wrapper">
+            <hot-table
+              [hotId]="hotidSupplierTbl"
+              [licenseKey]="licensekey"
+              [settings]="supplierTableSettings"
+            ></hot-table>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Price Details -->
+      <p-panel>
+        <p-header>{{ "Price Level Details" | translate }}</p-header>
+
+        <div class="card-body">
+          <div class="table-wrapper">
+            <hot-table
+              [hotId]="hotidPriceTbl"
+              [licenseKey]="licensekey"
+              [settings]="priceTableSettings"
+            ></hot-table>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Item List (Conditional) -->
+      <ng-container *ngIf="listmode">
+        <p-panel>
+          <p-header>{{ "Recent Items" | translate }}</p-header>
+
+          <div class="card-body">
+            <div class="compact-table">
+              <p-table
+                [value]="itemTableData | async"
+                [paginator]="true"
+                [rows]="5"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                  <tr>
+                    <td class="item-id">{{ item.itemMasterItemId }}</td>
+                    <td class="item-name">{{ item.itemMasterItemName }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </p-panel></ng-container
+      >
+    </div>
+    <div class="full-width-section">
+      <p-panel>
+        <p-header>{{ "Unit Details" | translate }}</p-header>
+
+        <div class="card-body">
+          <div class="table-wrapper" style="height: 250px">
+            <hot-table
+              [hotId]="hotidUnitTbl"
+              [licenseKey]="licensekey"
+              [settings]="unitTableSettings"
+            ></hot-table>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <!-- Lookup dialogs remain unchanged -->
+
+  <app-lookup
+    [header]="'Look Up'"
+    [selectedItem]="selectItem"
+    [eleReference]="elementReference"
+    [dataArry]="dataList"
+    [formControlName]="control"
+    (exitEvent)="exit($event)"
+    (clearEvent)="clear($event)"
+    [columns]="lookupColumns"
+    (selectItemEvent)="selectControl($event)"
+    (hideDialogEvent)="hide($event)"
+    [tableheader]="'Account List'"
+    [(show)]="showFormControlLookUp"
+  ></app-lookup>
+  <app-lookup
+    [header]="'supplier Look Up'"
+    [selectedItem]="selectItem"
+    [eleReference]="elementReference"
+    [dataArry]="dataList"
+    [formControlName]="control"
+    (exitEvent)="exit($event)"
+    (clearEvent)="clear($event)"
+    [columns]="lookupColumns"
+    (selectItemEvent)="selectSupplier($event)"
+    (hideDialogEvent)="hide($event)"
+    [tableheader]="'Account List'"
+    [(show)]="supplierLookUp"
+  ></app-lookup>
+
+  <app-lookup
+    [header]="'Look Up'"
+    [dataArry]="dataList"
+    [selectedItem]="selectItem"
+    [columns]="lookupColumns"
+    (selectItemEvent)="selectaccount($event)"
+    (exitEvent)="exit($event)"
+    [cell]="activeRow"
+    (clearEvent)="clear($event)"
+    (hideDialogEvent)="hide($event)"
+    [tableheader]="'Account List'"
+    [(show)]="showGridLookUp"
+  ></app-lookup>
+
+  <p-toast *ngIf="listmode"></p-toast>
+
+  <!-------Printer here-->
+  <!-- <button printSectionId="invoice-POS" ngxPrint>print</button> -->
+  <div style="height: 0; overflow: hidden; display: none">
+    <div class="invoice-POS" id="invoice-POS">
+      <div class="logo"></div>
+      <div class="info">
+        <h2
+          style="
+            text-align: center;
+            border-bottom: 1px solid black;
+            max-width: 44mm;
+          "
+        >
+          L'atelier des Arts
+        </h2>
+      </div>
+      <!--End Info-->
+
+      <div id="bot">
+        <div id="table" style="width: 100%">
+          <table>
+            <tr>
+              <td>Pigment Powder Metal</td>
+            </tr>
+            <tr>
+              <td>
+                <ngx-qrcode
+                  [elementType]="'url'"
+                  [value]="'your string'"
+                  cssClass="aclass"
+                  errorCorrectionLevel="L"
+                >
+                </ngx-qrcode>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ngx-barcode
+                  [bc-value]="'2114343434124-44355'"
+                  [bc-display-value]="true"
+                >
+                </ngx-barcode>
+              </td>
+            </tr>
+            <tr class="table-title">
+              <td>
+                <h2>AED: 3456</h2>
+              </td>
+              <td class="Rate">
+                <h2>59245668545</h2>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!--End Table-->
+      </div>
+      <!--End InvoiceBot-->
+    </div>
+  </div>
+
+  <p-confirmDialog
+    key="confirm-key"
+    acceptLabel="Yes"
+    rejectLabel="No"
+    header="Confirm"
+    [(visible)]="confirmDropDatabaseDialogVisible"
+  ></p-confirmDialog>
+
+  <!--End Invoice-->
+</div>
+
+<app-lookup
+  [header]="'Item Master'"
+  [dataArry]="dataList"
+  [isServerSearch]="isServerSearch"
+  [selectedItem]="selectItem"
+  [columns]="lookupGridColumns"
+  (selectItemEvent)="selectedItem($event)"
+  (exitEvent)="exit($event)"
+  [cell]="activeRow"
+  (clearEvent)="clear($event)"
+  (hideDialogEvent)="hide($event)"
+  (searchEvent)="onSearchItem($event)"
+  [tableheader]="'Item Master List'"
+  [(show)]="showItemMasterLookUp"
+></app-lookup>

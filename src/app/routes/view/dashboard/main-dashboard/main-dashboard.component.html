@@ -1,0 +1,5 @@
+    <ng-container [ngSwitch]="user?.userDashboard">
+      <app-dashboard *ngSwitchCase="'dashboard'"></app-dashboard>
+      <app-clockdashboard *ngSwitchCase="'clockdashboard'"></app-clockdashboard>
+      <app-dashboard *ngSwitchDefault></app-dashboard>
+    </ng-container>
