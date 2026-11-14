@@ -1,14 +1,15 @@
-.translator {
-    margin: 5px;
+:host {
+  display: block;
 }
-.lang-Items
-{
-color:  #fff;
-// padding: 12px 6px;
+
+.translator {
+  position: relative;
+}
+
+.lang-Items {
+  color: inherit;
 }
 
 .menuItem:hover {
-    background-color: rgb(29, 154, 158);
-    cursor: pointer;
+  cursor: pointer;
 }
-

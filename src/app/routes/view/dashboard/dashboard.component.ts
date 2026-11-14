@@ -16,48 +16,11 @@ import { MISService } from '../../service/mis/mis.service';
 import { ApiResponse } from '../../domain/Masters/ApiResponse';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { LoginService } from '../../service/login.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styles: [
-    `
-      .count {
-        background-color: #69a74aee;
-        position: relative;
-        font-size: 12px;
-        border-radius: 12px;
-        padding: 3px;
-        margin: -27px;
-        color: white;
-        font-weight: 700;
-        top: -14px;
-        left: -19px;
-      }
-
-      .progress-circle {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin-bottom: 10px;
-        background-color: white;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .progress-circle::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border: 10px solid #007bff; /* Set the border size and color */
-        border-radius: 50%;
-        box-sizing: border-box; /* Include the border in the total size */
-        transform: rotate(
-          calc(360 * var(--progress) / 100)
-        ); /* Rotate based on progress */
-      }
-    `,
-  ],
+  styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
@@ -117,42 +80,32 @@ export class DashboardComponent implements OnInit {
   PurchaseOrderCount: any;
   PurchaseRequisitionCount: any;
   ApprovedOrdersCount: any;
-  chartOptions: {
-    responsive: boolean;
-    maintainAspectRatio: boolean;
-    interaction: { mode: string; intersect: boolean };
-    stacked: boolean;
-    scales: {
-      y: {
-        type: string;
-        position: string;
-        ticks: { color: string };
-        grid: { color: string };
-      };
-      y1: {
-        type: string;
-        position: string;
-        ticks: { color: string };
-        grid: { drawOnChartArea: boolean };
-      };
-    };
-    plugins: {
-      legend: { labels: { color: string } };
-      title: { display: boolean; text: string };
-    };
-  };
+  chartOptions: any;
+  barChartOptions: any;
   selectedChart: any = 'SALES,PURCHASE';
   selectedPeriod: string = 'CURRENT_MONTH';
+
+  today: string = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+  greeting: string = 'Welcome back';
+  userName: string = '';
 
   constructor(
     private misService: MISService,
     private dashbaordServce: DashboardDataService,
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
+    this.resolveUserGreeting();
+    this.initChartOptions();
     this.GetFinancialYear();
     this.getPDC('TOTAL');
     this.initMenuItems();
@@ -186,7 +139,12 @@ export class DashboardComponent implements OnInit {
           label: 'Purchase',
           data: [28, 48, 40, 19, 86, 27, 90],
           fill: false,
-          borderColor: '#03A9F4',
+          borderColor: '#2f80ed',
+          backgroundColor: 'rgba(47, 128, 237, 0.12)',
+          borderWidth: 2,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          lineTension: 0.35,
         },
       ],
     };
@@ -196,17 +154,20 @@ export class DashboardComponent implements OnInit {
       datasets: [
         {
           label: 'Income',
-          backgroundColor: '#42A5F5',
+          backgroundColor: '#0f8b8d',
+          hoverBackgroundColor: '#0b6f7e',
           data: [65, 59, 80, 81, 56, 55, 40],
         },
         {
           label: 'Profit',
-          backgroundColor: '#FFA726',
+          backgroundColor: '#2f80ed',
+          hoverBackgroundColor: '#1f66c9',
           data: [28, 48, 40, 19, 86, 27, 90],
         },
         {
           label: 'Expense',
-          backgroundColor: '#D13A1A',
+          backgroundColor: '#f2994a',
+          hoverBackgroundColor: '#dd842f',
           data: [34, 12, 20, 10, 50, 90, -27],
         },
       ],
@@ -215,8 +176,9 @@ export class DashboardComponent implements OnInit {
       labels: ['Assets', 'Equity', 'Expenses', 'Income', 'Liabalities'],
       datasets: [
         {
-          label: 'AccountGroup',
-          backgroundColor: '#42A5F5',
+          label: 'Account Group',
+          backgroundColor: '#2f80ed',
+          hoverBackgroundColor: '#1f66c9',
           data: [65, 59, 80, 81, 56],
         },
       ],
@@ -224,6 +186,110 @@ export class DashboardComponent implements OnInit {
     this.LoadTabs(0);
     this.GetDasboardSalesPurchaseLineChart('CURRENT_MONTH');
   }
+  private resolveUserGreeting() {
+    const credentials = this.loginService.GetCredentialData();
+    this.userName = credentials?.userName || 'User';
+
+    const hour = new Date().getHours();
+    if (hour < 12) {
+      this.greeting = 'Good morning';
+    } else if (hour < 17) {
+      this.greeting = 'Good afternoon';
+    } else {
+      this.greeting = 'Good evening';
+    }
+  }
+
+  private initChartOptions() {
+    this.chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      legend: {
+        display: true,
+        position: 'top',
+        align: 'end',
+        labels: {
+          usePointStyle: true,
+          boxWidth: 8,
+          fontColor: '#486581',
+          fontSize: 11,
+        },
+      },
+      tooltips: {
+        backgroundColor: '#102a43',
+        titleFontSize: 11,
+        bodyFontSize: 11,
+        xPadding: 10,
+        yPadding: 8,
+        cornerRadius: 6,
+        displayColors: true,
+      },
+      scales: {
+        xAxes: [
+          {
+            gridLines: { display: false, drawBorder: false },
+            ticks: { fontColor: '#829ab1', fontSize: 11 },
+          },
+        ],
+        yAxes: [
+          {
+            gridLines: { color: '#eef2f7', drawBorder: false, zeroLineColor: '#eef2f7' },
+            ticks: {
+              fontColor: '#829ab1',
+              fontSize: 11,
+              beginAtZero: true,
+              padding: 6,
+            },
+          },
+        ],
+      },
+    };
+
+    this.barChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          boxWidth: 8,
+          fontColor: '#486581',
+          fontSize: 11,
+        },
+      },
+      tooltips: {
+        backgroundColor: '#102a43',
+        titleFontSize: 11,
+        bodyFontSize: 11,
+        xPadding: 10,
+        yPadding: 8,
+        cornerRadius: 6,
+        displayColors: true,
+      },
+      scales: {
+        xAxes: [
+          {
+            gridLines: { display: false, drawBorder: false },
+            ticks: { fontColor: '#829ab1', fontSize: 11 },
+          },
+        ],
+        yAxes: [
+          {
+            gridLines: { color: '#eef2f7', drawBorder: false, zeroLineColor: '#eef2f7' },
+            ticks: {
+              fontColor: '#829ab1',
+              fontSize: 11,
+              beginAtZero: true,
+              padding: 6,
+            },
+          },
+        ],
+      },
+    };
+  }
+
   initMenuItems() {
     this.items1 = [
       {
@@ -362,20 +428,19 @@ export class DashboardComponent implements OnInit {
           .split(',')
           .map((x) => parseFloat(x));
 
-        const documentStyle = getComputedStyle(document.documentElement);
-        const blueColor =
-          documentStyle.getPropertyValue('--blue-500') || '#42A5F5';
-        const greenColor =
-          documentStyle.getPropertyValue('--green-500') || '#66BB6A';
-
         this.chartData = {
           labels,
           datasets: [
             {
               label: 'Sales',
               data: salesData,
-              borderColor: blueColor.trim(),
+              borderColor: '#0f8b8d',
+              backgroundColor: 'rgba(15, 139, 141, 0.12)',
               fill: false,
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 4,
+              lineTension: 0.35,
             },
           ],
         };
@@ -386,8 +451,13 @@ export class DashboardComponent implements OnInit {
             {
               label: 'Purchase',
               data: purchaseData,
-              borderColor: greenColor.trim(),
+              borderColor: '#2f80ed',
+              backgroundColor: 'rgba(47, 128, 237, 0.12)',
               fill: false,
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 4,
+              lineTension: 0.35,
             },
           ],
         };
@@ -506,8 +576,7 @@ export class DashboardComponent implements OnInit {
       const pdcIssueRecord = data?.filter(
         (a) => a.discription == 'Total Amount of PDC Issued'
       );
-      this.pdcIssue = pdcIssueRecord[0]?.value;
-      this.pdcTotal += this.pdcIssue;
+      this.pdcIssue = pdcIssueRecord[0]?.value ?? 0;
 
       const pdcIssueCountRecord = data?.filter(
         (a) => a.discription == 'Total No. of PDC Issued'
@@ -518,15 +587,22 @@ export class DashboardComponent implements OnInit {
       const pdcReceiveRecord = data?.filter(
         (a) => a.discription == 'Total Amount of PDC Received'
       );
-      this.pdcReceive = pdcReceiveRecord[0]?.value;
-      this.pdcTotal += this.pdcReceive;
+      this.pdcReceive = pdcReceiveRecord[0]?.value ?? 0;
       const pdcReceiveCountRecord = data?.filter(
         (a) => a.discription == 'Total No. of PDC Received'
       );
       this.pdcReceiveCount = pdcReceiveCountRecord[0]?.value;
 
-      this.pdcIssuePer = ((this.pdcIssue / this.pdcTotal) * 100).toFixed(2);
-      this.pdcReceiveper = ((this.pdcReceive / this.pdcTotal) * 100).toFixed(2);
+      const issuedValue = Number(this.pdcIssue) || 0;
+      const receivedValue = Number(this.pdcReceive) || 0;
+      this.pdcTotal = issuedValue + receivedValue;
+
+      this.pdcIssuePer = this.pdcTotal
+        ? ((issuedValue / this.pdcTotal) * 100).toFixed(2)
+        : '0.00';
+      this.pdcReceiveper = this.pdcTotal
+        ? ((receivedValue / this.pdcTotal) * 100).toFixed(2)
+        : '0.00';
 
       //cash balance and bank bakance
       const bankbalance = data?.filter(

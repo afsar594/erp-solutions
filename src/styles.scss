@@ -583,3 +583,6 @@ table.border-table {
 .p-datepicker {
   z-index: 11000 !important; // must be higher than dialog baseZIndex
 }
+
+// Enterprise shell refresh (must stay last so it overrides theme/layout css)
+@import "./assets/sass/layout/enterprise";

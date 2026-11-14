@@ -25,9 +25,7 @@ import { LocalStorageService } from 'src/app/shared/service/storage.service';
 @Component({
   selector: 'app-topbar',
   templateUrl: './app.topbar.component.html',
-  styles: [
-    '.topbar-main {display: flex;width:100%; align-items: center;justify-content: space-between;}',
-  ],
+  styleUrls: ['./app.topbar.component.scss'],
 })
 export class AppTopBarComponent implements OnInit, AfterViewInit {
   model: Menu[] = [];

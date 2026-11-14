@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
   value: boolean;
   loadList: any;
   returnUrl: string = '/dashboard'; // default redirect
+  showPassword: boolean = false;
+  isSubmitting: boolean = false;
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -89,59 +91,85 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  clklogin() {
-    const formvalues = this.loginForm.value as User;
-    this.apiLogin.loginRequest(formvalues).subscribe((k) => {
-      if (k.valid) {
-        const encryptData = this._permission.encryptLogin(k.result);
-        this._local.remove('Login');
-        this._local.set('Login', encryptData);
-        this._local.remove('token');
-        this.storage.set('token', k.result?.token);
-        this._local.remove('groupId');
-        this.storage.set('groupId', k.result?.workGroupId);
-        this.apiLogin.user$.next(k.result);
-        this.masterapi.GetAllStation().subscribe((m) => {
-          var station = m[0];
-          const encryptedData = this._permission.encryptData(station);
-          this._local.remove('station');
-          this._local.set('station', encryptedData);
-        });
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Alert',
-          detail: k.message ? k.message : "Login Successfully",
-        });
-        // this.router.navigate(['/dashboard']);
-        this.router.navigateByUrl(this.returnUrl);
-        this.notificationService.connect();
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
-      } else {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Alert',
-          detail: k.message ? k.message : "Login Failed",
-        });
-      }
+  onForgotPassword(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Password Assistance',
+      detail: 'Please contact your system administrator to reset your login credentials.',
     });
   }
-  
+
+  clklogin() {
+    this.isSubmitting = true;
+    const formvalues = this.loginForm.value as User;
+    this.apiLogin.loginRequest(formvalues).subscribe(
+      (k) => {
+        this.isSubmitting = false;
+        if (k.valid) {
+          const encryptData = this._permission.encryptLogin(k.result);
+          this._local.remove('Login');
+          this._local.set('Login', encryptData);
+          this._local.remove('token');
+          this.storage.set('token', k.result?.token);
+          this._local.remove('groupId');
+          this.storage.set('groupId', k.result?.workGroupId);
+          this.apiLogin.user$.next(k.result);
+          this.masterapi.GetAllStation().subscribe((m) => {
+            var station = m[0];
+            const encryptedData = this._permission.encryptData(station);
+            this._local.remove('station');
+            this._local.set('station', encryptedData);
+          });
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Alert',
+            detail: k.message ? k.message : 'Login Successfully',
+          });
+          this.router.navigateByUrl(this.returnUrl);
+          this.notificationService.connect();
+        } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Alert',
+            detail: k.message ? k.message : 'Login Failed',
+          });
+        }
+      },
+      (error) => {
+        this.isSubmitting = false;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Connection Error',
+          detail: 'Unable to reach the server. Please verify your network connection.',
+        });
+      }
+    );
+  }
+
   onLocationChange(event) {
-    const selectedOption = this.loginForm.get('location')?.value
-    const locationData = JSON.stringify(selectedOption)
-    this.storage.set('selectedItemLocation', locationData)
+    const selectedOption = this.loginForm.get('location')?.value;
+    const locationData = JSON.stringify(selectedOption);
+    this.storage.set('selectedItemLocation', locationData);
   }
 
   clear() {
     this.loginForm.reset();
-    // this.loadIntialData();
     this.loginForm.patchValue({
       rememberme: false,
-      location: this.LocationmasterArry[0],
-      vfinancialperiod: this.FinacialPeriodArry[0],
+      location: this.LocationmasterArry && this.LocationmasterArry.length ? this.LocationmasterArry[0] : null,
+      financialperiod: this.FinacialPeriodArry && this.FinacialPeriodArry.length ? this.FinacialPeriodArry[0] : null,
     });
-    const locationData = JSON.stringify(this.LocationmasterArry[0])
-    this.storage.set('selectedItemLocation', locationData)
+    if (this.LocationmasterArry && this.LocationmasterArry.length) {
+      const locationData = JSON.stringify(this.LocationmasterArry[0]);
+      this.storage.set('selectedItemLocation', locationData);
+    }
   }
 
   getLocation() {

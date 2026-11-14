@@ -1,372 +1,355 @@
-<div class="p-grid dashboard">
-  <div class="p-col-12 p-md-6 p-lg-3">
-    <div class="p-grid card overview-box overview-box-1">
-      <div class="p-col-4 overview-box-icon">
-        <img src="assets/layout/images/icon-paper.png" />
+<div class="erp-dash">
+  <!-- ===================== Hero ===================== -->
+  <header class="erp-dash__hero">
+    <div class="erp-dash__hero-text">
+      <span class="erp-dash__eyebrow">Executive overview</span>
+      <h1 class="erp-dash__title">
+        {{ greeting }}, <span>{{ userName }}</span>
+      </h1>
+      <p class="erp-dash__subtitle">
+        <span>{{ today }}</span>
+        <span class="erp-dash__dot"></span>
+        <span>Here is your business at a glance</span>
+      </p>
+    </div>
+
+    <div class="erp-dash__hero-actions">
+      <p-splitButton
+        class="erp-period"
+        [label]="label1"
+        [model]="items1"
+      ></p-splitButton>
+    </div>
+  </header>
+
+  <!-- ===================== KPI cards ===================== -->
+  <section class="erp-kpi-grid">
+    <article class="erp-kpi">
+      <div class="erp-kpi__main">
+        <div class="erp-kpi__head">
+          <span class="erp-kpi__icon"><i class="pi pi-file"></i></span>
+          <span class="erp-kpi__label">PDC Issued</span>
+        </div>
+        <div class="erp-kpi__value">
+          {{ pdcIssueCount }}
+          <span class="erp-kpi__unit">Pcs</span>
+        </div>
+        <span class="erp-kpi__meta">{{ pdcIssuePer }}% of total PDC value</span>
       </div>
-      <div class="p-col-8">
+      <div class="erp-kpi__ring">
         <app-circle-progress
           [value]="pdcIssuePer"
-          [strokeColor]="'#76c9f9'"
+          [strokeColor]="'#0f8b8d'"
         ></app-circle-progress>
-        <span class="overview-box-name">
-          <span class="count">{{ pdcIssueCount }}</span>
-          PDC ISSUED
-        </span>
       </div>
-    </div>
-  </div>
-  <div class="p-col-12 p-md-6 p-lg-3">
-    <div class="p-grid card overview-box overview-box-2">
-      <div class="p-col-4 overview-box-icon">
-        <img src="assets/layout/images/icon-mail.png" />
-      </div>
+    </article>
 
-      <div class="p-col-8">
-        <!-- <span class="overview-box-count">3216</span> -->
+    <article class="erp-kpi erp-kpi--blue">
+      <div class="erp-kpi__main">
+        <div class="erp-kpi__head">
+          <span class="erp-kpi__icon"><i class="pi pi-inbox"></i></span>
+          <span class="erp-kpi__label">PDC Received</span>
+        </div>
+        <div class="erp-kpi__value">
+          {{ pdcReceiveCount }}
+          <span class="erp-kpi__unit">Pcs</span>
+        </div>
+        <span class="erp-kpi__meta">{{ pdcReceiveper }}% of total PDC value</span>
+      </div>
+      <div class="erp-kpi__ring">
         <app-circle-progress
           [value]="pdcReceiveper"
-          [strokeColor]="'#1f487e'"
+          [strokeColor]="'#2f80ed'"
         ></app-circle-progress>
-        <span class="overview-box-name">
-          <span class="count">{{ pdcReceiveCount }}</span>
-          PDC RECEIVED
-        </span>
       </div>
-    </div>
-  </div>
-  <div class="p-col-12 p-md-6 p-lg-3">
-    <div class="p-grid card overview-box overview-box-3">
-      <div class="p-col-4 overview-box-icon">
-        <img src="assets/layout/images/icon-location.png" />
-      </div>
-      <div class="p-col-8">
-        <span class="overview-box-count">{{ mainCash }}</span>
-        <span class="overview-box-name">CASH BALANCE</span>
-      </div>
-    </div>
-  </div>
-  <div class="p-col-12 p-md-6 p-lg-3">
-    <div class="p-grid card overview-box overview-box-4">
-      <div class="p-col-4 overview-box-icon">
-        <img src="assets/layout/images/icon-orders.png" />
-      </div>
-      <div class="p-col-8">
-        <span class="overview-box-count">{{ BankBalance }}</span>
-        <span class="overview-box-name">BANK BALANCE</span>
-      </div>
-    </div>
-  </div>
-  <p-panel>
-    <p-header>
-      <div style="float: left; padding: 4px 0"></div>
-      <div style="float: right">
-        <p-splitButton
-          [label]="label1"
-          [model]="items1"
-          styleClass="p-button-outlined mr-2 mb-2"
-        ></p-splitButton>
-      </div>
-    </p-header>
+    </article>
 
-    <div class="p-grid">
-      <div class="p-col-12 p-md-12 p-lg-4 contacts">
-        <p-panel>
-          <p-header>
-            <div style="float: left; padding: 4px 0">Split Summary</div>
-          </p-header>
-          <ul>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/recieved.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span class="name"
-                  >Incoming PDC Amount (Recieved) in 5days</span
-                >
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  incomingPdcReceived
-                }}</span>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/issued.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span class="name">Incoming PDC Amount (Issued) in 5days</span>
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  incomingPdcIssue
-                }}</span>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/purchase.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span class="name">Current Month Purchase</span>
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  CurrentMonthPurchase
-                }}</span>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/sales.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span class="name">Current Month Sales</span>
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  CurrentMonthSales
-                }}</span>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/purchase.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span class="name">Previous Month Purchase</span>
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  PrevMonthPurchase
-                }}</span>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/sales.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span class="name">Previous Month Sales</span>
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  PrevMonthSales
-                }}</span>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/purchase.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span class="name">Current Month Expense</span>
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  CurrMonthExpense
-                }}</span>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/purchase.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span class="name">Previous Month Expense</span>
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  PrevMonthExpense
-                }}</span>
-              </div>
-            </li>
-          </ul>
-        </p-panel>
-        <p-panel>
-          <p-header>
-            <div style="float: left; padding: 4px 0">Approved/Pending</div>
-          </p-header>
-          <ul>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/purchase_req.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span
-                  class="name"
-                  (click)="RouterNavigate('Purchase Requisition', 'Pending')"
-                  >Purchase Requisition Pending</span
-                >
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  PurchaseRequisitionCount
-                }}</span>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/orderpending.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span
-                  class="name"
-                  (click)="RouterNavigate('Purchase Order', 'Pending')"
-                  >Purchase Order Pending</span
-                >
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  PurchaseOrderCount
-                }}</span>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img
-                src="assets/layout/images/approved.png"
-                library="verona-layout"
-                width="45"
-              />
-              <div class="contact-info">
-                <span
-                  class="name"
-                  (click)="RouterNavigate('Purchase Order', 'Approved')"
-                  >Order Approved</span
-                >
-              </div>
-              <div class="contact-actions">
-                <span class="connection-status online">{{
-                  ApprovedOrdersCount
-                }}</span>
-              </div>
-            </li>
-          </ul>
-        </p-panel>
-      </div>
-
-      <div class="p-grid p-col-12 p-md-12 p-lg-8 contacts">
-        <div class="p-col-12 p-md-12 p-lg-6">
-          <p-panel>
-            <p-header>
-              <div style="float: left; padding: 4px 0">Sales</div>
-              <div style="float: right">
-                <!-- <p-splitButton
-                [label]="label1"
-                [model]="items1"
-                (onClick)="selectedChart = 'SALES'"
-                styleClass="p-button-outlined mr-2 mb-2"
-              ></p-splitButton> -->
-              </div>
-            </p-header>
-
-            <div>
-              <p-chart
-                *ngIf="chartData"
-                type="line"
-                [data]="chartData"
-                [options]="chartOptions"
-                [responsive]="true"
-              ></p-chart>
-            </div>
-          </p-panel>
-
-          <p-panel>
-            <p-header>
-              <div style="float: left; padding: 4px 0">Purchase</div>
-              <div style="float: right">
-                <!-- <p-splitButton
-                [label]="label1"
-                [model]="items1"
-                (onClick)="selectedChart = 'PURCHASE'"
-                styleClass="p-button-outlined mr-2 mb-2"
-              ></p-splitButton> -->
-              </div>
-            </p-header>
-            <div style="overflow: auto">
-              <p-chart
-                *ngIf="chartData4"
-                type="line"
-                [data]="chartData4"
-                [options]="chartOptions"
-                [responsive]="true"
-                type="line"
-              ></p-chart>
-            </div>
-          </p-panel>
+    <article class="erp-kpi erp-kpi--amber">
+      <div class="erp-kpi__main">
+        <div class="erp-kpi__head">
+          <span class="erp-kpi__icon"><i class="pi pi-wallet"></i></span>
+          <span class="erp-kpi__label">Cash Balance</span>
         </div>
-        <div class="p-col-12 p-md-12 p-lg-6">
-          <p-panel>
-            <p-header>
-              <div style="float: left; padding: 4px 0">
-                Income/Expense/Profit
-              </div>
-              <div style="float: right">
-                <!-- <p-splitButton
-                [label]="label3"
-                [model]="items3"
-                styleClass="p-button-outlined mr-2 mb-2"
-              ></p-splitButton> -->
-              </div>
-            </p-header>
-            <div style="overflow: auto">
-              <p-chart
-                type="bar"
-                [data]="chartData2"
-                responsive="true"
-              ></p-chart>
-            </div>
-          </p-panel>
+        <div class="erp-kpi__value">{{ mainCash }}</div>
+        <span class="erp-kpi__meta">Liquid cash position</span>
+      </div>
+      <span class="erp-kpi__badge">
+        <i class="pi pi-wallet"></i> On hand
+      </span>
+    </article>
 
-          <p-panel>
-            <p-header>
-              <div style="float: left; padding: 4px 0">
-                Account Group Balance
-              </div>
-              <div style="float: right">
-                <!-- <p-splitButton
-                [label]="label4"
-                [model]="items4"
-                (onClick)="OnChartChangeEvent($event, 'ACCOUNT_GRP')"
-                styleClass="p-button-outlined mr-2 mb-2"
-              ></p-splitButton> -->
-              </div>
-            </p-header>
-            <div style="overflow: auto">
-              <p-chart
-                type="bar"
-                [data]="chartData3"
-                responsive="true"
-              ></p-chart>
-            </div>
-          </p-panel>
+    <article class="erp-kpi erp-kpi--green">
+      <div class="erp-kpi__main">
+        <div class="erp-kpi__head">
+          <span class="erp-kpi__icon"><i class="pi pi-credit-card"></i></span>
+          <span class="erp-kpi__label">Bank Balance</span>
+        </div>
+        <div class="erp-kpi__value">{{ BankBalance }}</div>
+        <span class="erp-kpi__meta">Consolidated bank position</span>
+      </div>
+      <span class="erp-kpi__badge">
+        <i class="pi pi-check-circle"></i> Verified
+      </span>
+    </article>
+  </section>
+
+  <!-- ===================== Summary + charts ===================== -->
+  <section class="erp-dash__grid">
+    <div class="erp-dash__column erp-dash__column--summary">
+      <!-- Split summary -->
+      <div class="erp-panel">
+        <div class="erp-panel__head">
+          <div class="erp-panel__heading">
+            <h2 class="erp-panel__title">Split Summary</h2>
+            <span class="erp-panel__subtitle">Current balances &amp; movement</span>
+          </div>
+          <span class="erp-panel__chip">
+            <i class="pi pi-calendar"></i>
+            {{ label1 }}
+          </span>
+        </div>
+
+        <div class="erp-panel__body erp-panel__body--flush">
+          <ul class="erp-list">
+            <li class="erp-list__item">
+              <span class="erp-list__icon erp-list__icon--green">
+                <i class="pi pi-download"></i>
+              </span>
+              <span class="erp-list__label">
+                Incoming PDC Amount (Received) in 5 days
+              </span>
+              <span class="erp-list__value">{{ incomingPdcReceived }}</span>
+            </li>
+
+            <li class="erp-list__item">
+              <span class="erp-list__icon erp-list__icon--amber">
+                <i class="pi pi-upload"></i>
+              </span>
+              <span class="erp-list__label">
+                Incoming PDC Amount (Issued) in 5 days
+              </span>
+              <span class="erp-list__value">{{ incomingPdcIssue }}</span>
+            </li>
+
+            <li class="erp-list__item">
+              <span class="erp-list__icon erp-list__icon--blue">
+                <i class="pi pi-shopping-cart"></i>
+              </span>
+              <span class="erp-list__label">Current Month Purchase</span>
+              <span class="erp-list__value">{{ CurrentMonthPurchase }}</span>
+            </li>
+
+            <li class="erp-list__item">
+              <span class="erp-list__icon">
+                <i class="pi pi-chart-line"></i>
+              </span>
+              <span class="erp-list__label">Current Month Sales</span>
+              <span class="erp-list__value">{{ CurrentMonthSales }}</span>
+            </li>
+
+            <li class="erp-list__item">
+              <span class="erp-list__icon erp-list__icon--blue">
+                <i class="pi pi-shopping-cart"></i>
+              </span>
+              <span class="erp-list__label">Previous Month Purchase</span>
+              <span class="erp-list__value">{{ PrevMonthPurchase }}</span>
+            </li>
+
+            <li class="erp-list__item">
+              <span class="erp-list__icon">
+                <i class="pi pi-chart-line"></i>
+              </span>
+              <span class="erp-list__label">Previous Month Sales</span>
+              <span class="erp-list__value">{{ PrevMonthSales }}</span>
+            </li>
+
+            <li class="erp-list__item">
+              <span class="erp-list__icon erp-list__icon--amber">
+                <i class="pi pi-money-bill"></i>
+              </span>
+              <span class="erp-list__label">Current Month Expense</span>
+              <span class="erp-list__value">{{ CurrMonthExpense }}</span>
+            </li>
+
+            <li class="erp-list__item">
+              <span class="erp-list__icon erp-list__icon--amber">
+                <i class="pi pi-money-bill"></i>
+              </span>
+              <span class="erp-list__label">Previous Month Expense</span>
+              <span class="erp-list__value">{{ PrevMonthExpense }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Approvals -->
+      <div class="erp-panel">
+        <div class="erp-panel__head">
+          <div class="erp-panel__heading">
+            <h2 class="erp-panel__title">Approved / Pending</h2>
+            <span class="erp-panel__subtitle">Workflow items needing attention</span>
+          </div>
+          <span class="erp-panel__chip">
+            <i class="pi pi-clock"></i>
+            Live
+          </span>
+        </div>
+
+        <div class="erp-panel__body erp-panel__body--flush">
+          <ul class="erp-list erp-list--approvals">
+            <li class="erp-list__item">
+              <span class="erp-list__icon erp-list__icon--amber">
+                <i class="pi pi-file"></i>
+              </span>
+              <span
+                class="erp-list__label erp-list__label--link"
+                (click)="RouterNavigate('Purchase Requisition', 'Pending')"
+              >
+                Purchase Requisition Pending
+              </span>
+              <span class="erp-list__value">{{ PurchaseRequisitionCount }}</span>
+            </li>
+
+            <li class="erp-list__item">
+              <span class="erp-list__icon erp-list__icon--blue">
+                <i class="pi pi-shopping-cart"></i>
+              </span>
+              <span
+                class="erp-list__label erp-list__label--link"
+                (click)="RouterNavigate('Purchase Order', 'Pending')"
+              >
+                Purchase Order Pending
+              </span>
+              <span class="erp-list__value">{{ PurchaseOrderCount }}</span>
+            </li>
+
+            <li class="erp-list__item">
+              <span class="erp-list__icon erp-list__icon--green">
+                <i class="pi pi-check-circle"></i>
+              </span>
+              <span
+                class="erp-list__label erp-list__label--link"
+                (click)="RouterNavigate('Purchase Order', 'Approved')"
+              >
+                Order Approved
+              </span>
+              <span class="erp-list__value">{{ ApprovedOrdersCount }}</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <div>
+
+    <div class="erp-dash__charts">
+      <!-- Sales -->
+      <div class="erp-panel">
+        <div class="erp-panel__head">
+          <div class="erp-panel__heading">
+            <h2 class="erp-panel__title">Sales Trend</h2>
+            <span class="erp-panel__subtitle">{{ label1 }}</span>
+          </div>
+          <span class="erp-panel__chip">
+            <i class="pi pi-chart-line"></i>
+            Sales
+          </span>
+        </div>
+        <div class="erp-panel__body erp-panel__body--chart">
+          <p-chart
+            *ngIf="chartData"
+            type="line"
+            [data]="chartData"
+            [options]="chartOptions"
+            [responsive]="true"
+          ></p-chart>
+        </div>
+      </div>
+
+      <!-- Purchase -->
+      <div class="erp-panel">
+        <div class="erp-panel__head">
+          <div class="erp-panel__heading">
+            <h2 class="erp-panel__title">Purchase Trend</h2>
+            <span class="erp-panel__subtitle">{{ label1 }}</span>
+          </div>
+          <span class="erp-panel__chip">
+            <i class="pi pi-shopping-cart"></i>
+            Purchase
+          </span>
+        </div>
+        <div class="erp-panel__body erp-panel__body--chart">
+          <p-chart
+            *ngIf="chartData4"
+            type="line"
+            [data]="chartData4"
+            [options]="chartOptions"
+            [responsive]="true"
+          ></p-chart>
+        </div>
+      </div>
+
+      <!-- Income / Expense / Profit -->
+      <div class="erp-panel">
+        <div class="erp-panel__head">
+          <div class="erp-panel__heading">
+            <h2 class="erp-panel__title">Income / Expense / Profit</h2>
+            <span class="erp-panel__subtitle">Monthly composition</span>
+          </div>
+          <span class="erp-panel__chip">
+            <i class="pi pi-chart-bar"></i>
+            Performance
+          </span>
+        </div>
+        <div class="erp-panel__body erp-panel__body--chart">
+          <p-chart
+            type="bar"
+            [data]="chartData2"
+            [options]="barChartOptions"
+            [responsive]="true"
+          ></p-chart>
+        </div>
+      </div>
+
+      <!-- Account group balance -->
+      <div class="erp-panel">
+        <div class="erp-panel__head">
+          <div class="erp-panel__heading">
+            <h2 class="erp-panel__title">Account Group Balance</h2>
+            <span class="erp-panel__subtitle">Ledger distribution</span>
+          </div>
+          <span class="erp-panel__chip">
+            <i class="pi pi-chart-bar"></i>
+            Ledger
+          </span>
+        </div>
+        <div class="erp-panel__body erp-panel__body--chart">
+          <p-chart
+            type="bar"
+            [data]="chartData3"
+            [options]="barChartOptions"
+            [responsive]="true"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Registers ===================== -->
+  <section class="erp-panel erp-panel--tables">
+    <div class="erp-dash__tables-head">
+      <h2 class="erp-panel__title">
+        <i class="pi pi-table"></i>
+        Operational Registers
+      </h2>
+      <span class="erp-panel__chip">
+        <i class="pi pi-filter"></i>
+        Live data
+      </span>
+    </div>
+
+    <div class="erp-tabs">
       <p-tabView (onChange)="LoadTabs($event.index)">
-        <p-tabPanel header="Suppliers">
+      <p-tabPanel header="Suppliers">
+        <div class="erp-table">
           <p-table
             #tt1
             [columns]="suppliercols"
@@ -378,28 +361,24 @@
             [rows]="10"
           >
             <ng-template pTemplate="caption">
-              <i class="pi pi-search" style="margin: 4px 4px 0 0"></i>
+              <i class="pi pi-search"></i>
               <input
                 type="text"
                 pInputText
-                size="50"
-                placeholder="Global Filter"
+                class="erp-table-search"
+                placeholder="Search suppliers..."
                 (input)="tt1.filterGlobal($event.target.value, 'contains')"
-                style="width: 85% !important"
               />
             </ng-template>
             <ng-template pTemplate="header" let-columns>
               <tr>
-                <th *ngFor="let col of columns">
-                  {{ col.header }}
-                </th>
+                <th *ngFor="let col of columns">{{ col.header }}</th>
               </tr>
               <tr>
                 <th *ngFor="let col of columns" [ngSwitch]="col.field">
                   <input
                     pInputText
                     type="text"
-                    style="width: 100%"
                     (input)="
                       tt1?.filter(
                         $event.target.value,
@@ -419,8 +398,11 @@
               </tr>
             </ng-template>
           </p-table>
-        </p-tabPanel>
-        <p-tabPanel header="Customers">
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Customers">
+        <div class="erp-table">
           <p-table
             #tt2
             [columns]="customercols"
@@ -432,28 +414,24 @@
             [rows]="10"
           >
             <ng-template pTemplate="caption">
-              <i class="pi pi-search" style="margin: 4px 4px 0 0"></i>
+              <i class="pi pi-search"></i>
               <input
                 type="text"
                 pInputText
-                size="50"
-                placeholder="Global Filter"
+                class="erp-table-search"
+                placeholder="Search customers..."
                 (input)="tt2.filterGlobal($event.target.value, 'contains')"
-                style="width: 85% !important"
               />
             </ng-template>
             <ng-template pTemplate="header" let-columns>
               <tr>
-                <th *ngFor="let col of columns">
-                  {{ col.header }}
-                </th>
+                <th *ngFor="let col of columns">{{ col.header }}</th>
               </tr>
               <tr>
                 <th *ngFor="let col of columns" [ngSwitch]="col.field">
                   <input
                     pInputText
                     type="text"
-                    style="width: 100%"
                     (input)="
                       tt2?.filter(
                         $event.target.value,
@@ -473,8 +451,11 @@
               </tr>
             </ng-template>
           </p-table>
-        </p-tabPanel>
-        <p-tabPanel header="PDC Issued">
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="PDC Issued">
+        <div class="erp-table">
           <p-table
             #tt3
             [columns]="pdcIssuecols"
@@ -486,28 +467,24 @@
             [rows]="10"
           >
             <ng-template pTemplate="caption">
-              <i class="pi pi-search" style="margin: 4px 4px 0 0"></i>
+              <i class="pi pi-search"></i>
               <input
                 type="text"
                 pInputText
-                size="50"
-                placeholder="Global Filter"
+                class="erp-table-search"
+                placeholder="Search issued PDC..."
                 (input)="tt3.filterGlobal($event.target.value, 'contains')"
-                style="width: 85% !important"
               />
             </ng-template>
             <ng-template pTemplate="header" let-columns>
               <tr>
-                <th *ngFor="let col of columns">
-                  {{ col.header }}
-                </th>
+                <th *ngFor="let col of columns">{{ col.header }}</th>
               </tr>
               <tr>
                 <th *ngFor="let col of columns" [ngSwitch]="col.field">
                   <input
                     pInputText
                     type="text"
-                    style="width: 100%"
                     (input)="
                       tt3?.filter(
                         $event.target.value,
@@ -527,8 +504,11 @@
               </tr>
             </ng-template>
           </p-table>
-        </p-tabPanel>
-        <p-tabPanel header="PDC Recieved">
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="PDC Received">
+        <div class="erp-table">
           <p-table
             #tt4
             [columns]="pdcReceivecols"
@@ -540,28 +520,24 @@
             [rows]="10"
           >
             <ng-template pTemplate="caption">
-              <i class="pi pi-search" style="margin: 4px 4px 0 0"></i>
+              <i class="pi pi-search"></i>
               <input
                 type="text"
                 pInputText
-                size="50"
-                placeholder="Global Filter"
+                class="erp-table-search"
+                placeholder="Search received PDC..."
                 (input)="tt4.filterGlobal($event.target.value, 'contains')"
-                style="width: 85% !important"
               />
             </ng-template>
             <ng-template pTemplate="header" let-columns>
               <tr>
-                <th *ngFor="let col of columns">
-                  {{ col.header }}
-                </th>
+                <th *ngFor="let col of columns">{{ col.header }}</th>
               </tr>
               <tr>
                 <th *ngFor="let col of columns" [ngSwitch]="col.field">
                   <input
                     pInputText
                     type="text"
-                    style="width: 100%"
                     (input)="
                       tt4?.filter(
                         $event.target.value,
@@ -581,8 +557,9 @@
               </tr>
             </ng-template>
           </p-table>
-        </p-tabPanel>
-      </p-tabView>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
     </div>
-  </p-panel>
+  </section>
 </div>

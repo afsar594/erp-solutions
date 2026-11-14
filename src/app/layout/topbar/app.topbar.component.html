@@ -1,75 +1,52 @@
 <div class="topbar">
   <div class="topbar-main">
-    <div style="display: flex; align-items: center">
+    <div class="topbar-brand-group">
       <a href="#" id="menu-button" (click)="toggleMenu()">
         <span class="fa fa-bars"></span>
       </a>
 
-      <a href="/">
-        <img alt="main logo" src="assets/Images/logo.png" class="logo" />
+      <a href="/" class="topbar-brand">
+        <span class="topbar-logo-tile">
+          <img alt="main logo" src="assets/Images/logo.png" class="logo" />
+        </span>
+        <span class="app-name">
+          <span class="app-name__title">
+            {{ companyDetails?.stationMasterStationName | translate }}
+          </span>
+          <span class="app-tagline">Enterprise Suite</span>
+        </span>
       </a>
-
-      <div class="app-name">
-        <a href="/">{{
-          companyDetails?.stationMasterStationName | translate
-        }}</a>
-      </div>
     </div>
 
-    <div
-      class="user-panel"
-      style="display: flex; align-content: flex-end; position: relative"
-    >
-      <app-translater
-        style="display: flex; align-items: center"
-      ></app-translater>
+    <div class="user-panel">
+      <app-translater></app-translater>
 
       <!-- Notification Bell -->
       <div
         id="notification-bell"
-        style="position: relative; margin-right: 15px"
+        class="topbar-icon-btn"
         (click)="notificationService.toggleNotifications($event)"
       >
-        <i
-          class="fa fa-bell"
-          style="
-            font-size: 20px;
-            cursor: pointer;
-            color: rgb(64, 207, 8);
-            margin: 7px 0 0 10px;
-          "
-        ></i>
+        <i class="fa fa-bell"></i>
         <span
+          class="notification-badge"
           *ngIf="notificationService.unreadCount > 0"
-          style="
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: red;
-            color: white;
-            border-radius: 50%;
-            font-size: 12px;
-            padding: 2px 6px;
-          "
         >
           {{ notificationService.unreadCount }}
         </span>
 
         <!-- Notification Dropdown -->
         <div
+          class="notification-panel"
           *ngIf="notificationService.notificationsVisible"
-          style="
-            position: absolute;
-            right: 0;
-            top: 28px;
-            background: white;
-            padding: 0;
-            margin: 0;
-            width: 300px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 999;
-          "
         >
+          <div class="notification-panel__head">
+            <span class="notification-panel__title">Notifications</span>
+            <span class="notification-panel__count">
+              {{ notificationService.unreadCount }} new
+            </span>
+          </div>
+
           <p-listbox
             [options]="notificationService.notifications"
             optionLabel="message"
@@ -79,18 +56,20 @@
           </p-listbox>
 
           <div
+            class="notification-panel__empty"
             *ngIf="notificationService.notifications.length === 0"
-            style="padding: 10px; text-align: center; color: gray"
           >
-            No new notifications
+            <i class="pi pi-bell"></i>
+            You are all caught up
           </div>
         </div>
       </div>
 
       <!-- User Menu -->
       <div id="user-display" (click)="app.onTopbarMenuButtonClick($event)">
-        <div style="margin: 0 4px">
+        <div class="user-meta">
           <div class="username">{{ userData.userName | translate }}</div>
+          <div class="userrole">Administrator</div>
         </div>
         <img
           alt="main logo"
@@ -140,5 +119,7 @@
     </div>
   </div>
 
-  <app-menu [itemMenu]="items"></app-menu>
+  <div class="topbar-nav">
+    <app-menu [itemMenu]="items"></app-menu>
+  </div>
 </div>
