@@ -632,6 +632,15 @@ export class GRNComponent implements OnInit, AfterViewInit {
       },
     });
   }
+   LoadCostCentreDDL() {
+      this.utilityService.LoadDropdowncostcenterMasters().subscribe((m: any) => {
+        this.costcenterArray = m.resultSet.costcenterMasters;
+        this.costcenterList = m.resultSet.costcenterMasters?.map((kl: any) => ({
+          label: kl.costCenterMasterCostCenterName,
+          value: kl.costCenterMasterCostCenterId,
+        }));
+      });
+    }
   get costSetLookup() {
     return this.costcenterArray?.map((kl) => ({
       cost: kl.costCenterMasterCostCenterName,
@@ -1398,6 +1407,11 @@ export class GRNComponent implements OnInit, AfterViewInit {
     purchaseVoucher_Save.purchaseVoucherDetails = savedData
       ?.filter((k) => k.itemId != null)
       .map((k: any) => {
+        console.log("test", k);
+
+
+        let  constcenter=this.costcenterList?.find((c) =>c.label?.trim().toLowerCase() === k.costcenter?.trim().toLowerCase())?.value ?? null
+debugger
         return {
           purchaseVoucherDetailsId: k.id != null ? k.id : 0,
           purchaseVoucherDetailsNo:
@@ -1440,7 +1454,9 @@ export class GRNComponent implements OnInit, AfterViewInit {
           purchaseVoucherDetailsDelStatus: false,
           purchaseVoucherDetailsPoId: k.poId,
           purchaseVoucherDetailsPodId: k.podId,
-        };
+       purchaseVoucherDetailsCostCenter:constcenter,
+  
+}
       });
     const creditData: AccountsTransactions = {
       accountsTransactionsAccNo:
@@ -1552,6 +1568,7 @@ export class GRNComponent implements OnInit, AfterViewInit {
     purchaseVoucher_Save.accountsTransactions.push(debitData);
 
     if (this.btnFlag.save) {
+      debugger
       this.saveVoucher(purchaseVoucher_Save);
     } else {
       this.updateVoucher(purchaseVoucher_Save);
@@ -1622,6 +1639,7 @@ export class GRNComponent implements OnInit, AfterViewInit {
     this.LoadLocationDDL();
     this.LoadSupplierDDL();
     this.LoadAccountSettingDDL();
+     this.LoadCostCentreDDL()
     // this.GetDefaultSettings();
   }
   getGRNByID(id: string) {
@@ -2000,14 +2018,15 @@ export class GRNComponent implements OnInit, AfterViewInit {
                   (l) => l.value == k?.purchaseVoucherDetailsJobID
                 )?.label
               : null,
-          costcenter: null,
+          costcenter: this.costcenterList?.find(
+            (c) => c.value === k.PurchaseVoucherDetailsCostCenter
+          )?.label ?? null,
           narration: k.purchaseVoucherDetailsRemarks,
           id: k.purchaseVoucherDetailsPurcahseDetailsId,
           poId: k?.purchaseVoucherDetailsPoId,
           podId: k?.purchaseVoucherDetailsPodId,
         };
       });
-
     this.purchasevoucher_entryDataset = gridData;
 
     const hotInstance = this.hotRegisterer.getInstance(this.hotid);
@@ -2178,11 +2197,14 @@ export class GRNComponent implements OnInit, AfterViewInit {
   }
 
   selectsales(evt) {
+    const hotInstance = this.hotRegisterer.getInstance(this.hotid);
+    
     if (evt.job) {
-      // const jobname = evt.job.split(' -- ')
-      this.hotRegisterer
-        .getInstance(this.hotid)
-        .setDataAtCell(this.activeRow.row, 13, evt.job);
+      hotInstance.setDataAtCell(this.activeRow.row, 13, evt.job);
+    } else if (evt.cost) {
+      // Handle cost center selection
+      const costCenterDisplay = `${evt.cost}`;
+      hotInstance.setDataAtCell(this.activeRow.row, 14, costCenterDisplay);
     } else {
       if (this.clickedRowColumn.column == 0) {
         if (this.itemList.includes(evt.procurementsId)) {
@@ -2204,7 +2226,6 @@ export class GRNComponent implements OnInit, AfterViewInit {
         var UnitId: any = this.unitArray?.find(
           (l) => l.unitMasterUnitId == evt.procurementsId
         );
-        const hotInstance = this.hotRegisterer.getInstance(this.hotid);
 
         hotInstance.setDataAtCell(
           this.activeRow.row,
@@ -2221,7 +2242,6 @@ export class GRNComponent implements OnInit, AfterViewInit {
           .GetItemMasterById({ id: evt.procurementsId })
           .subscribe((k) => {
             this.ItemMasterArrayByName = k.resultSet?.itemMaster;
-            const hotInstance = this.hotRegisterer.getInstance(this.hotid);
 
             if (this.ItemMasterArrayByName.unitDetails) {
               const unitId =
@@ -2248,11 +2268,6 @@ export class GRNComponent implements OnInit, AfterViewInit {
                 5,
                 this.ItemMasterArrayByName.unitDetails?.unitDetailsRate
               );
-              // hotInstance.setDataAtCell(
-              //   this.activeRow.row,
-              //   16,
-              //   this.ItemMasterArrayByName.unitDetails?.unitDetailsConversionType
-              // );
             }
             hotInstance.setDataAtCell(
               this.activeRow.row,
@@ -2263,8 +2278,7 @@ export class GRNComponent implements OnInit, AfterViewInit {
       }
     }
     this.showSalesLookUp = false;
-    const hot = this.hotRegisterer.getInstance(this.hotid);
-    hot.selectCell(this.activeRow.row, 4);
+    hotInstance.selectCell(this.activeRow.row, 4);
   }
 
   selectUnits(evt) {
