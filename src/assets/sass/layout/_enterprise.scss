@@ -77,39 +77,59 @@ body .layout-wrapper .topbar #menu-button {
 /* ------------------------------------------------------------
    Brand
    ------------------------------------------------------------ */
+body .layout-wrapper .topbar .topbar-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 body .layout-wrapper .topbar .topbar-brand {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 1 1 auto;
   min-width: 0;
   text-decoration: none;
 }
 
+/* The BioS asset is a stacked mark on a black field. Crop it to the
+   emblem and screen out the black so it sits cleanly on the dark
+   toolbar instead of reading as a pasted-on black square. */
 body .layout-wrapper .topbar .topbar-logo-tile {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
   width: 42px;
   height: 42px;
+  border: 0;
   border-radius: 12px;
-  background: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.55);
+  background: transparent;
+  box-shadow: none;
   overflow: hidden;
 }
 
 body .layout-wrapper .topbar .topbar-logo-tile .logo {
-  width: 30px;
-  height: auto;
+  position: absolute;
+  top: -20%;
+  left: -31%;
+  width: auto;
+  height: 162%;
+  max-width: none;
   margin: 0;
   display: block;
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
 
 body .layout-wrapper .topbar .app-name {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: 1 1 auto;
   min-width: 0;
   margin: 0;
   font-size: 13px;
@@ -119,14 +139,17 @@ body .layout-wrapper .topbar .app-name {
 body .layout-wrapper .topbar .app-name a,
 body .layout-wrapper .topbar .app-name__title {
   display: block;
-  max-width: 320px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  max-width: none;
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
   color: #ffffff;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.01em;
+  line-height: 1.2;
   text-decoration: none;
 }
 
@@ -146,6 +169,7 @@ body .layout-wrapper .topbar .user-panel {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex: 0 0 auto;
   gap: 9px;
   min-width: 0;
 }
@@ -658,13 +682,9 @@ body .layout-wrapper .footer .footer-right span {
     border-radius: 10px;
   }
 
-  body .layout-wrapper .topbar .topbar-logo-tile .logo {
-    width: 25px;
-  }
-
   body .layout-wrapper .topbar .app-name a,
   body .layout-wrapper .topbar .app-name__title {
-    max-width: 46vw;
+    max-width: none;
     font-size: 13px;
   }
 

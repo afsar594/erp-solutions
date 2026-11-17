@@ -62,6 +62,7 @@ export class AppTopBarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.companyDetails = this.permission.getStation();
+      console.log(this.companyDetails);
       this.user = this._local.get('Login').userName;
       this.userData = this.loginser.GetCredentialData();
     }, 2000);

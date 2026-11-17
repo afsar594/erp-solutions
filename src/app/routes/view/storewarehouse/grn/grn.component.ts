@@ -1411,7 +1411,6 @@ export class GRNComponent implements OnInit, AfterViewInit {
 
 
         let  constcenter=this.costcenterList?.find((c) =>c.label?.trim().toLowerCase() === k.costcenter?.trim().toLowerCase())?.value ?? null
-debugger
         return {
           purchaseVoucherDetailsId: k.id != null ? k.id : 0,
           purchaseVoucherDetailsNo:
@@ -1568,7 +1567,6 @@ debugger
     purchaseVoucher_Save.accountsTransactions.push(debitData);
 
     if (this.btnFlag.save) {
-      debugger
       this.saveVoucher(purchaseVoucher_Save);
     } else {
       this.updateVoucher(purchaseVoucher_Save);
@@ -2019,7 +2017,7 @@ debugger
                 )?.label
               : null,
           costcenter: this.costcenterList?.find(
-            (c) => c.value === k.PurchaseVoucherDetailsCostCenter
+            (c) => c.value === k.purchaseVoucherDetailsCostCenter
           )?.label ?? null,
           narration: k.purchaseVoucherDetailsRemarks,
           id: k.purchaseVoucherDetailsPurcahseDetailsId,
