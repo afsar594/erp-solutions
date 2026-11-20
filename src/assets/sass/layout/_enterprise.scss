@@ -612,6 +612,38 @@ body .layout-wrapper .footer img {
   border-radius: 6px;
 }
 
+/* Footer badge: reuse the BioS emblem crop from the toolbar, mounted in
+   a small dark chip so the asset's black field reads as intentional. */
+body .layout-wrapper .footer .footer-logo-tile {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  border: 1px solid rgba(143, 211, 216, 0.4);
+  border-radius: 8px;
+  background: #0b1f38;
+  box-shadow: 0 4px 10px -6px rgba(5, 20, 40, 0.55);
+  overflow: hidden;
+}
+
+body .layout-wrapper .footer .footer-logo-tile .logo {
+  position: absolute;
+  top: -20%;
+  left: -31%;
+  width: auto;
+  height: 162%;
+  max-width: none;
+  margin: 0;
+  display: block;
+  border-radius: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
 body .layout-wrapper .footer .app-name {
   margin: 0;
   font-size: 12.5px;

@@ -586,3 +586,6 @@ table.border-table {
 
 // Enterprise shell refresh (must stay last so it overrides theme/layout css)
 @import "./assets/sass/layout/enterprise";
+
+// Professional dark theme — final override layer for shell, PrimeNG and Handsontable
+@import "./assets/sass/layout/dark-theme";

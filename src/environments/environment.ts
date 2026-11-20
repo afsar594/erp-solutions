@@ -1,9 +1,10 @@
 export const environment = {
   production: false,
-
   apiRootURL: 'http://localhost:53447/api/',
 //apiRootURL: 'http://194.233.95.37:809/api/',
   // apiRootURL: 'http://194.233.95.37:83/api/',
+//    apiRootURL: 'http://26.242.86.53:8002/api/', // water project
+
 
   reportApiUrl: 'http://194.233.95.37:8085/api/', // reports
 

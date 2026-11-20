@@ -15,8 +15,7 @@
         </span>
         <span class="app-name">
           <span class="app-name__title">
-            {{ companyDetails?.stationMasterStationName | translate }}
-          </span>
+{{ 'BIOS BY VEKTORZ PROJECT COSTING TOOL' | translate }}</span>
           <span class="app-tagline">Enterprise Suite</span>
         </span>
       </a>
@@ -76,9 +75,16 @@
           <div class="userrole">Administrator</div>
         </div>
         <img
-          alt="main logo"
+          *ngIf="userData.userImage; else defaultUserLogo"
+          alt="User profile"
           [src]="'data:image/png;base64,' + userData.userImage"
         />
+        <ng-template #defaultUserLogo>
+          <img
+            alt="BioS user"
+            src="assets/Images/BioS_CyberSecure.png"
+          />
+        </ng-template>
       </div>
 
       <ul
