@@ -2915,8 +2915,8 @@ export class JobmasterComponent implements OnInit {
     });
     //===========================
     jobMaster_Save.jobMasterBudgetDetails = BudjetsavedData
-      // ?.filter(k =>
-      //   k.jobMasterBudgetDetailsBudAmount > 0)
+      ?.filter(k =>
+        k.jobMasterBudgetDetailsBudDesc !=null)
       .map((k: BudjetGridData) => {
         return {
           jobMasterBudgetDetailsDtlId:
