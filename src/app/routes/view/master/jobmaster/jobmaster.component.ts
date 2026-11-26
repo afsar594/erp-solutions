@@ -2919,20 +2919,21 @@ export class JobmasterComponent implements OnInit {
         k.jobMasterBudgetDetailsBudDesc !=null)
       .map((k: BudjetGridData) => {
         return {
-          jobMasterBudgetDetailsDtlId:
-            k.jobMasterBudgetDetailsDtlId != null
-              ? k.jobMasterBudgetDetailsDtlId
-              : 0,
+          //jobMasterBudgetDetailsDtlId:
+            // k.jobMasterBudgetDetailsDtlId != null
+            //   ? k.jobMasterBudgetDetailsDtlId
+            //   : 0,
           jobMasterBudgetDetailsDelStatus: false,
           jobMasterNo: this.jobMasterFormGroup.getRawValue().jobMasterNo,
           jobMasterBudgetDetailsJobId:
             k.jobMasterBudgetDetailsJobId != null
               ? k.jobMasterBudgetDetailsJobId
               : 0,
-          JobMasterBudgetDetailsActual:
-            k.jobMasterBudgetDetailsActual != null
-              ? k.jobMasterBudgetDetailsActual
-              : 0,
+          // JobMasterBudgetDetailsActual:
+          //   k.jobMasterBudgetDetailsActual != null
+          //     ? k.jobMasterBudgetDetailsActual
+          //     : 0,
+            JobMasterBudgetDetailsBudAmount:k.jobMasterBudgetDetailsBudAmount!=null ? k.jobMasterBudgetDetailsBudAmount:0,  
           JobMasterBudgetDetailsVariance:
             k.jobMasterBudgetDetailsVariance != null
               ? k.jobMasterBudgetDetailsVariance
