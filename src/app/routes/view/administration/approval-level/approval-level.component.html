@@ -63,7 +63,11 @@
                                     <!-- <p-dropdown filter="true" [disabled]="isdisabled" [filter]="true" [options]="Users"
                                         [(ngModel)]="data.approverId" class="w-100">
                                     </p-dropdown> -->
-                                    <p-multiSelect [options]="Users" [disabled]="isdisabled" [(ngModel)]="data.approverIds"   [style]="{width: '100%'}"
+                                    <p-multiSelect class="approval-user-multiselect" [options]="Users" [disabled]="isdisabled"
+                                        [(ngModel)]="data.approverIds" [filter]="true" filterPlaceHolder="Search users"
+                                        [scrollHeight]="'260px'" [appendTo]="'body'"
+                                        panelStyleClass="approval-user-multiselect-panel"
+                                        [style]="{width: '100%'}"
                                         (onChange)="onSelectionChange($event)"></p-multiSelect>
 
                                 </td>

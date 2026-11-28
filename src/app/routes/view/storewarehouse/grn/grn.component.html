@@ -79,7 +79,9 @@
       [model]="printbtn"
       label="Print Report"
       [disabled]="!btnFlag.edit || !Permission.Print"
-      styleClass="p-button-outlined mr-2 mb-2"
+      styleClass="p-button-outlined mr-2 mb-2 crystal-report-split"
+      appendTo="body"
+      menuStyleClass="crystal-report-menu"
     >
     </p-splitButton>
     <button

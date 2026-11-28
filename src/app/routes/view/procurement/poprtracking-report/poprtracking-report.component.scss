@@ -1,0 +1,15 @@
+/* PO PR Tracking report — keep the Print Report action aligned with the
+   filter columns without changing any report/selection logic. */
+.crystal-report-action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .crystal-report-action {
+    justify-content: flex-start;
+  }
+}

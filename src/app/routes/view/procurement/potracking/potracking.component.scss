@@ -1,0 +1,24 @@
+/* PO Tracking toolbar — keep the existing Show/Excel actions aligned and
+   readable without changing any of their handlers or data flow. */
+.po-tracking-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  float: none;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  button {
+    margin: 0 !important;
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .po-tracking-toolbar {
+    justify-content: flex-start;
+  }
+}

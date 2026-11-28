@@ -1086,17 +1086,22 @@ export class JobmasterComponent implements OnInit {
     });
     this.costcenter.beforeChangeRender = (change, source) => {
       const hotinstance = this.hotRegisterer.getInstance(this.costcenterhotiD);
-      if (change != null) {
-        var data = hotinstance.getDataAtRow(change[0][0]);
-        if (
-          data[2] != null &&
-          data[3] != null &&
-          change[0][1] != 'jobMasterControlVariance'
-        ) {
-          const value = data[2] - data[3];
-          this.hotRegisterer
-            .getInstance(this.costcenterhotiD)
-            .setDataAtCell(change[0][0], 4, value);
+      if (change != null && hotinstance) {
+        // Cost Control Summary: Variance = Budget Amount - PR Amount.
+        // Recalculate immediately when either value changes, including
+        // the first time a Budget is entered while PR is already present.
+        for (const [row, prop] of change) {
+          if (prop === 'jobMasterControlActual' || prop === 'prAmount') {
+            const data = hotinstance.getDataAtRow(row);
+            if (data) {
+              // Columns: 2 = PR Amount, 3 = Budget, 4 = Variance
+              hotinstance.setDataAtCell(
+                row,
+                4,
+                this.calculateVariance(data[3], data[2])
+              );
+            }
+          }
         }
       }
 
@@ -3761,28 +3766,40 @@ export class JobmasterComponent implements OnInit {
 
       const matchedRows = controlMap.get(costCenter.value) ?? [];
 
-      const prRow = matchedRows.find(x => x.voucherType === 'PR');
-      const otherRow = matchedRows.find(x => x.voucherType !== 'PR');
       const baseRow = matchedRows[0] ?? {};
+
+      // Budget Amount comes from Job Master, PR Amount from Purchase Requisition.
+      // A cost center can have more than one control row, so total both values.
+      const budgetAmount = matchedRows.reduce(
+        (sum, row) => sum + this.toNumber(row?.jobMasterControlActual),
+        0
+      );
+      const prAmount = matchedRows.reduce(
+        (sum, row) => sum + this.toNumber(row?.prAmount),
+        0
+      );
 
       return {
         jobMasterControlCostCenerName: costCenter.label,
         jobMasterControlCostCenerID: costCenter.value,
 
-        jobMasterControlAmount: this.toNumber(otherRow?.jobMasterControlAmount),
+        jobMasterControlAmount: this.toNumber(baseRow?.jobMasterControlAmount),
 
-        prAmount: this.toNumber(baseRow?.prAmount),
+        prAmount,
         boqAmount: this.toNumber(baseRow?.boqAmount),
 
         jobMasterControlLevel1: this.toNumber(baseRow?.jobMasterControlLevel1),
         jobMasterControlLevel2: this.toNumber(baseRow?.jobMasterControlLevel2),
         jobMasterControlLevel3: this.toNumber(baseRow?.jobMasterControlLevel3),
 
-        jobMasterControlActual: this.toNumber(baseRow?.jobMasterControlActual),
+        jobMasterControlActual: budgetAmount,
         notifAmount: this.toNumber(baseRow?.notifAmount),
 
-        // No calculation — just take value from backend or default 0
-        jobMasterControlVariance: this.toNumber(baseRow?.jobMasterControlVariance),
+        // Variance = Budget Amount - PR Amount
+        jobMasterControlVariance: this.calculateVariance(
+          budgetAmount,
+          prAmount
+        ),
 
         jobMasterBudgetDetailsEmail:
           baseRow?.jobMasterBudgetDetailsEmail ?? false,
@@ -3900,6 +3917,11 @@ export class JobmasterComponent implements OnInit {
 
     const num = Number(value);
     return isNaN(num) ? 0 : num;
+  }
+
+  /** Cost Control Summary: Variance = Budget Amount - PR Amount */
+  private calculateVariance(budgetAmount: any, prAmount: any): number {
+    return this.toNumber(budgetAmount) - this.toNumber(prAmount);
   }
 
   setupAutoCalculation() {

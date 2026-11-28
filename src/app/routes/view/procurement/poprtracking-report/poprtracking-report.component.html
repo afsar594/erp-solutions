@@ -112,12 +112,14 @@
             </p-panel>
             <!-- </div> -->
           </div>
-          <div class="p-col-4">
+          <div class="p-col-4 crystal-report-action">
             <p-splitButton
               icon="fa fa-print"
               [model]="printbtn"
               label="Print Report"
-              styleClass="p-button-outlined mr-2 mb-2"
+              styleClass="p-button-outlined mr-2 mb-2 crystal-report-split"
+              appendTo="body"
+              menuStyleClass="crystal-report-menu"
             >
             </p-splitButton>
           </div>
